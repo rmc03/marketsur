@@ -8,17 +8,23 @@ const MENU_ITEMS = [
 ];
 
 export function Sidebar({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
   return (
     <>
+      {/* Overlay */}
       <div
-        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60] animate-fade-in"
+        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={onClose}
         aria-hidden="true"
       />
       
-      <div className="fixed inset-y-0 left-0 w-[280px] bg-white dark:bg-[#242526] shadow-2xl z-[60] flex flex-col animate-slide-in-left transition-colors">
+      {/* Drawer */}
+      <div 
+        className={`fixed inset-y-0 left-0 w-[280px] bg-white dark:bg-[#242526] shadow-2xl z-[60] flex flex-col transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
         <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-[#3E4042] bg-[#F0F2F5] dark:bg-[#18191A]">
           <div className="flex items-center gap-2 text-[#1877F2]">
             <Storefront className="w-8 h-8" weight="duotone" />

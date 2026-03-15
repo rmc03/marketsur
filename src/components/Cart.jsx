@@ -3,8 +3,6 @@ import { CartItem } from './CartItem';
 import { generarMensajeWhatsApp } from '../lib/whatsapp';
 
 export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total, onOrder }) {
-  if (!isOpen) return null;
-
   const handleOrder = () => {
     if (items.length === 0) return;
     if (onOrder) onOrder(items, total);
@@ -15,12 +13,18 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
   return (
     <>
       <div
-        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 animate-fade-in"
+        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={onClose}
         aria-hidden="true"
       />
       
-      <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-50 flex flex-col animate-slide-in-right transition-colors">
+      <div 
+        className={`fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-50 flex flex-col transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-[#3E4042]">
           <h2 className="text-xl font-extrabold text-slate-800 dark:text-[#E4E6EB] flex items-center gap-2">
             <ShoppingBag className="w-6 h-6 text-[#1877F2]" weight="duotone" />
