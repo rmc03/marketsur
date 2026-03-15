@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue } from 'framer-motion';
+import { motion, useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
 
 export function PullToRefresh({ onRefresh, children }) {
   const [isPulling, setIsPulling] = useState(false);
@@ -12,84 +12,57 @@ export function PullToRefresh({ onRefresh, children }) {
   const MAX_PULL = 120;
   const THRESHOLD = 80;
 
-  useEffect(() => {
-    const handleTouchStart = (e) => {
-      if (window.scrollY === 0 && !isRefreshing) {
-        startY.current = e.touches[0].clientY;
-        setIsPulling(true);
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      if (!isPulling) return;
-      const currentY = e.touches[0].clientY;
-      const diff = currentY - startY.current;
-      
-      // Only pull down
-      if (diff > 0) {
-        // Add resistance
-        const pulled = Math.min(diff * 0.4, MAX_PULL);
-        y.set(pulled);
-      }
-    };
-
-    const handleTouchEnd = async () => {
-      if (!isPulling) return;
-      setIsPulling(false);
-      
-      if (y.get() > THRESHOLD && !isRefreshing) {
-        setIsRefreshing(true);
-        // Snap to refresh position
-        await controls.start({ y: 60, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-        
-        if (onRefresh) {
-            // First animate it out of view
-            setIsRefreshing(false);
-            await controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-            y.set(0);
-            
-            // Then execute the refresh (which might reload the page)
-            await onRefresh();
-        } else {
-            // Fake delay if no callback provided
-            await new Promise(r => setTimeout(r, 1500));
-            // Reset
-            setIsRefreshing(false);
-            controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-            y.set(0);
-        }
-      } else {
-        // Cancel pull
-        controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-        y.set(0);
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('touchstart', handleTouchStart, { passive: true });
-      container.addEventListener('touchmove', handleTouchMove, { passive: true });
-      container.addEventListener('touchend', handleTouchEnd);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchmove', handleTouchMove);
-        container.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, [isPulling, isRefreshing, onRefresh, controls, y]);
-
   return (
-    <div ref={containerRef} className="relative w-full h-full flex flex-col items-center">
+    <div className="relative w-full h-full">
+      {/* Invisible drag layer at the top to catch gestures natively via Framer Motion */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-32 z-[100] touch-none"
+        drag="y"
+        dragConstraints={{ top: 0, bottom: MAX_PULL }}
+        dragElastic={0.4}
+        dragDirectionLock
+        onDrag={(e, info) => {
+          if (window.scrollY === 0 && !isRefreshing) {
+            y.set(info.offset.y);
+          }
+        }}
+        onDragEnd={async (e, info) => {
+          if (isRefreshing || window.scrollY > 0) return;
+          
+          if (info.offset.y > THRESHOLD) {
+            setIsRefreshing(true);
+            // Snap to refresh target position
+            await controls.start({ y: 80, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            
+            if (onRefresh) {
+              await onRefresh();
+            } else {
+              await new Promise(r => setTimeout(r, 1500));
+            }
+            
+            // Unmount animation
+            setIsRefreshing(false);
+            await controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            y.set(0);
+          } else {
+            // Cancel and spring back up out of view
+            controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            y.set(0);
+          }
+        }}
+      />
+
+      {/* The Visual Spinner entirely detached from page flow */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 flex justify-center z-[100] pointer-events-none"
-        style={{ y: isPulling ? y : undefined }}
+        className="fixed top-0 left-0 right-0 flex justify-center z-[110] pointer-events-none"
+        initial={{ y: -100 }}
+        style={{ y: useMotionValueEvent(y, "change", (latest) => {
+            if(!isRefreshing) controls.set({y: latest - 100}) // Move visual spinner down from hidden start point
+        }) }}
         animate={controls}
       >
         <div 
-          className="bg-white dark:bg-[#242526] shadow-xl ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 rounded-full w-10 h-10 flex items-center justify-center -mt-10"
+          className="bg-white dark:bg-[#242526] shadow-xl ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 rounded-full w-10 h-10 flex items-center justify-center mt-4"
           style={{ opacity: isRefreshing ? 1 : 0.8 }}
         >
           <div className={`w-5 h-5 border-2 border-slate-300 dark:border-slate-600 border-t-[#1877F2] rounded-full ${isRefreshing ? 'animate-spin' : ''}`} 
@@ -97,7 +70,11 @@ export function PullToRefresh({ onRefresh, children }) {
           />
         </div>
       </motion.div>
-      {children}
+
+      {/* App Content */}
+      <div className="w-full h-full relative z-0">
+        {children}
+      </div>
     </div>
   );
 }
