@@ -6,6 +6,7 @@ import { useDarkMode } from './hooks/useDarkMode';
 import { useOrderHistory } from './hooks/useOrderHistory';
 import { useOnboarding } from './hooks/useOnboarding';
 import { Onboarding } from './components/Onboarding';
+import { PullToRefresh } from './components/PullToRefresh';
 
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
@@ -89,15 +90,17 @@ function App() {
           onClose={() => setIsSidebarOpen(false)} 
         />
         
-        <div className="flex-1 relative overflow-x-hidden">
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<AnimatedPage><Home onAddToCart={handleAddToCart} /></AnimatedPage>} />
-              <Route path="/producto/:id" element={<AnimatedPage><ProductDetail onAddToCart={handleAddToCart} /></AnimatedPage>} />
-              <Route path="/nosotros" element={<AnimatedPage><About /></AnimatedPage>} />
-              <Route path="/historial" element={<AnimatedPage><OrderHistory /></AnimatedPage>} />
-            </Routes>
-          </AnimatePresence>
+        <div className="flex-1 relative overflow-x-hidden w-full">
+          <PullToRefresh onRefresh={() => window.location.reload()}>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<AnimatedPage><Home onAddToCart={handleAddToCart} /></AnimatedPage>} />
+                <Route path="/producto/:id" element={<AnimatedPage><ProductDetail onAddToCart={handleAddToCart} /></AnimatedPage>} />
+                <Route path="/nosotros" element={<AnimatedPage><About /></AnimatedPage>} />
+                <Route path="/historial" element={<AnimatedPage><OrderHistory /></AnimatedPage>} />
+              </Routes>
+            </AnimatePresence>
+          </PullToRefresh>
         </div>
 
         <Toast key={toastKey} message="¡Añadido al carrito! 🛒" visible={toastVisible} />
