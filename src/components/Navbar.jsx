@@ -1,14 +1,22 @@
-import { ShoppingCart, Storefront, Sun, Moon } from '@phosphor-icons/react';
+import { ShoppingCart, Storefront, Sun, Moon, List } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-export function Navbar({ onOpenCart, cartCount, dark, onToggleDark }) {
+export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSidebar }) {
   return (
     <nav className="glass-header px-4 py-3 flex items-center justify-between sticky top-0 z-40 transition-all duration-300">
-      <Link to="/" className="flex items-center gap-2 text-[#1877F2] hover:text-[#166FE5] transition-colors">
-        <Storefront className="w-6 h-6" weight="duotone" />
-        <span className="font-extrabold text-xl tracking-tight">Market Sur</span>
-      </Link>
-      
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onOpenSidebar}
+          className="p-1 -ml-1 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#3A3B3C] rounded-xl transition-colors active:scale-95"
+          aria-label="Abrir menú"
+        >
+          <List className="w-7 h-7" weight="bold" />
+        </button>
+        <Link to="/" className="flex items-center gap-2 text-[#1877F2] hover:text-[#166FE5] transition-colors -ml-1">
+          <Storefront className="w-6 h-6" weight="duotone" />
+          <span className="font-extrabold text-xl tracking-tight leading-none">Market Sur</span>
+        </Link>
+      </div>
       <div className="flex items-center gap-1">
         <button
           onClick={onToggleDark}

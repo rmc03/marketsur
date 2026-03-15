@@ -7,10 +7,10 @@ import { useOnboarding } from './hooks/useOnboarding';
 import { Onboarding } from './components/Onboarding';
 
 import { Navbar } from './components/Navbar';
+import { Sidebar } from './components/Sidebar';
 import { Cart } from './components/Cart';
 import { FloatingCartButton } from './components/FloatingCartButton';
 import { Toast } from './components/Toast';
-import { BottomNav } from './components/BottomNav';
 
 import { Home } from './pages/Home';
 import { ProductDetail } from './pages/ProductDetail';
@@ -18,6 +18,7 @@ import { About } from './pages/About';
 import { OrderHistory } from './pages/OrderHistory';
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastKey, setToastKey] = useState(0);
@@ -50,6 +51,12 @@ function App() {
           onOpenCart={() => setIsCartOpen(true)}
           dark={dark}
           onToggleDark={toggleDark}
+          onOpenSidebar={() => setIsSidebarOpen(true)}
+        />
+
+        <Sidebar 
+          isOpen={isSidebarOpen} 
+          onClose={() => setIsSidebarOpen(false)} 
         />
         
         <div className="flex-1 relative">
@@ -70,9 +77,6 @@ function App() {
           total={total}
           onOpenCart={() => setIsCartOpen(true)}
         />
-
-        {/* Bottom Navigation */}
-        <BottomNav />
 
         {/* Cart drawer */}
         <Cart 
