@@ -64,40 +64,107 @@
   }
 }
 
-/* Animations */
+/* ===================== Animations ===================== */
+
+/* Slide in from right (cart drawer) */
 @keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
 
+/* Generic fade */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
+/* Pop scale (badge, FAB) */
 @keyframes popIn {
-  0% { transform: scale(0.9); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0%   { transform: scale(0.7); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
 }
 
-.animate-slide-in-right {
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Card stagger entrance */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.2s ease-out forwards;
+/* Shimmer sweep for skeleton */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
-.animate-pop-in {
-  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Hero mesh gradient shift */
+@keyframes meshShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Toast slide up + fade */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0)   scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+/* Badge count bump */
+@keyframes badgeBump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* ---- Utility classes ---- */
+.animate-slide-in-right  { animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fade-in         { animation: fadeIn 0.2s ease-out forwards; }
+.animate-pop-in          { animation: popIn  0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-toast-in        { animation: toastIn  0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-toast-out       { animation: toastOut 0.25s ease-in forwards; }
+.animate-badge-bump      { animation: badgeBump 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Stagger card grid */
+.card-stagger > *:nth-child(1)  { animation: cardIn 0.4s ease both 0.05s; }
+.card-stagger > *:nth-child(2)  { animation: cardIn 0.4s ease both 0.10s; }
+.card-stagger > *:nth-child(3)  { animation: cardIn 0.4s ease both 0.15s; }
+.card-stagger > *:nth-child(4)  { animation: cardIn 0.4s ease both 0.20s; }
+.card-stagger > *:nth-child(5)  { animation: cardIn 0.4s ease both 0.25s; }
+.card-stagger > *:nth-child(6)  { animation: cardIn 0.4s ease both 0.30s; }
+.card-stagger > *:nth-child(7)  { animation: cardIn 0.4s ease both 0.35s; }
+.card-stagger > *:nth-child(8)  { animation: cardIn 0.4s ease both 0.40s; }
+.card-stagger > *:nth-child(n+9){ animation: cardIn 0.4s ease both 0.45s; }
+
+/* Shimmer skeleton */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 25%,
+    #f8fafc 50%,
+    #f1f5f9 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.dark .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #2d2e2f 25%,
+    #3a3b3c 50%,
+    #2d2e2f 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Hero animated gradient */
+.hero-gradient {
+  background: linear-gradient(135deg, #1877F2, #0e58c8, #1565d8, #1877F2, #2d8ef5);
+  background-size: 300% 300%;
+  animation: meshShift 8s ease infinite;
 }
