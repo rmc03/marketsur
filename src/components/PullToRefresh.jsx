@@ -34,16 +34,21 @@ export function PullToRefresh({ onRefresh, children }) {
             // Snap to refresh target position
             await controls.start({ y: 80, transition: { type: 'spring', stiffness: 300, damping: 20 } });
             
-            if (onRefresh) {
-              await onRefresh();
-            } else {
-              await new Promise(r => setTimeout(r, 1500));
+            try {
+              if (onRefresh) {
+                // Execute the refresh
+                await onRefresh();
+              } else {
+                await new Promise(r => setTimeout(r, 1500));
+              }
+            } catch (error) {
+              console.error("PullToRefresh error:", error);
+            } finally {
+              // Guaranteed Unmount animation
+              setIsRefreshing(false);
+              await controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+              y.set(0);
             }
-            
-            // Unmount animation
-            setIsRefreshing(false);
-            await controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-            y.set(0);
           } else {
             // Cancel and spring back up out of view
             controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
