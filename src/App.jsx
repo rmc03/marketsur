@@ -90,7 +90,7 @@ function App() {
           onClose={() => setIsSidebarOpen(false)} 
         />
         
-        <div className="flex-1 relative overflow-x-hidden w-full">
+        <div className="flex-1 relative overflow-x-clip w-full">
           <PullToRefresh onRefresh={() => window.location.reload()}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
