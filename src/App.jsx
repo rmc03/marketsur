@@ -11,7 +11,6 @@ import { PullToRefresh } from './components/PullToRefresh';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import { Cart } from './components/Cart';
-import { FloatingCartButton } from './components/FloatingCartButton';
 import { Toast } from './components/Toast';
 
 import { Home } from './pages/Home';
@@ -105,12 +104,6 @@ function App() {
         </div>
 
         <Toast key={toastKey} message="¡Añadido al carrito! 🛒" visible={toastVisible} />
-
-        <FloatingCartButton 
-          cartCount={cantidad}
-          total={total}
-          onOpenCart={() => setIsCartOpen(true)}
-        />
 
         <Cart 
           isOpen={isCartOpen} 
