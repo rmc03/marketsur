@@ -1,4 +1,4 @@
-import { Plus, ShoppingBag } from 'lucide-react';
+import { Plus, ShoppingBag } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
 export function ProductCard({ producto, onAdd }) {
@@ -37,13 +37,13 @@ export function ProductCard({ producto, onAdd }) {
         )}
 
         {/* Badges top-left */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
-          {destacado && (
+        {destacado && (
+          <div className="absolute top-2 left-2 z-10">
             <span className="flex items-center gap-1 bg-gradient-to-r from-amber-400 to-orange-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md shadow-orange-400/30">
               ⭐ Destacado
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* ── Content ── */}
@@ -55,7 +55,7 @@ export function ProductCard({ producto, onAdd }) {
         
         <div className="flex items-center justify-between mt-auto">
           <div className="flex flex-col">
-            <span className="font-bold text-xl text-slate-900 dark:text-white leading-none">
+            <span className="font-extrabold text-xl text-slate-900 dark:text-white leading-none">
               ${precio.toLocaleString('es-AR')}
             </span>
             <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium mt-0.5">CUP</span>
@@ -67,11 +67,11 @@ export function ProductCard({ producto, onAdd }) {
               className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1877F2] text-white hover:bg-[#166FE5] active:bg-[#145DBF] active:scale-90 transition-all shadow-md shadow-[#1877F2]/30"
               aria-label="Añadir al carrito"
             >
-              <Plus className="w-4 h-4 pointer-events-none" />
+              <Plus className="w-4 h-4 pointer-events-none" weight="bold" />
             </button>
           ) : (
             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-[#3A3B3C] text-slate-300 dark:text-slate-600 cursor-not-allowed">
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4" weight="duotone" />
             </div>
           )}
         </div>

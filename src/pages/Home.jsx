@@ -4,7 +4,7 @@ import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { ProductCard } from '../components/ProductCard';
 import { PromoBanner } from '../components/PromoBanner';
-import { Store } from 'lucide-react';
+import { Store } from '@phosphor-icons/react';
 
 // Shimmer skeleton card
 function SkeletonCard() {
