@@ -3,7 +3,6 @@ import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { ProductCard } from '../components/ProductCard';
-import { PromoBanner } from '../components/PromoBanner';
 import { Storefront, SortAscending } from '@phosphor-icons/react';
 
 const SORT_OPTIONS = [
@@ -70,9 +69,6 @@ export function Home({ onAddToCart }) {
           </p>
         </div>
       </section>
-
-      {/* Promo Banner */}
-      <PromoBanner />
 
       {/* Sticky: Search + Filter + Sort */}
       <div className="sticky top-[60px] z-30 bg-white/95 dark:bg-[#242526]/95 backdrop-blur-xl border-b border-slate-100 dark:border-[#3E4042] pb-2 shadow-sm rounded-b-2xl transition-colors duration-300">
