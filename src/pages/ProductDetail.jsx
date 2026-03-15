@@ -43,8 +43,8 @@ export function ProductDetail({ onAddToCart }) {
         setShared(true);
         setTimeout(() => setShared(false), 2000);
       }
-    } catch (e) {
-      // user cancelled share
+    } catch (err) {
+      console.log('Error sharing:', err);
     }
   };
 

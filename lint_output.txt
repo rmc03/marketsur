@@ -1,0 +1,36 @@
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\components\BottomNav.jsx
+  15:36  error  'Icon' is defined but never used  no-unused-vars
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\components\CategoryFilter.jsx
+  37:39  error  'Icon' is defined but never used  no-unused-vars
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\components\Onboarding.jsx
+   1:20  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                no-unused-vars
+  86:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\components\Toast.jsx
+  10:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+   8 |   useEffect(() => {
+   9 |     if (visible) {
+> 10 |       setShow(true);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  11 |       setAnimating(false);
+  12 |       const t = setTimeout(() => setAnimating(true), 1800);
+  13 |       const u = setTimeout(() => setShow(false), 2150);  react-hooks/set-state-in-effect
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\pages\About.jsx
+  40:30  error  'Icon' is defined but never used  no-unused-vars
+
+D:\Universidad\Proyectos\Market Sur\marketsur\src\pages\Home.jsx
+  1:20  error  'useCallback' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+✖ 7 problems (7 errors, 0 warnings)
+

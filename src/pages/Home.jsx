@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { ProductCard } from '../components/ProductCard';
 import { PromoBanner } from '../components/PromoBanner';
-import { Store, SortAscending } from '@phosphor-icons/react';
+import { Storefront, SortAscending } from '@phosphor-icons/react';
 
 const SORT_OPTIONS = [
   { value: 'default',    label: 'Por defecto' },
@@ -62,7 +62,7 @@ export function Home({ onAddToCart }) {
         <div className="absolute top-4 right-8 w-16 h-16 rounded-full bg-white/10" />
         <div className="relative z-10 flex flex-col items-center text-center mt-2">
           <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-3 shadow-lg">
-            <Store className="w-6 h-6 text-white" weight="duotone" />
+            <Storefront className="w-6 h-6 text-white" weight="duotone" />
           </div>
           <h1 className="text-3xl font-extrabold mb-1.5 tracking-tight">Market Sur</h1>
           <p className="text-blue-100 text-sm max-w-[260px] text-balance leading-relaxed">
@@ -131,7 +131,7 @@ export function Home({ onAddToCart }) {
         ) : productos.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500">
             <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-[#3A3B3C] flex items-center justify-center mb-4">
-              <Store className="w-8 h-8 opacity-30" weight="duotone" />
+              <Storefront className="w-8 h-8 opacity-30" weight="duotone" />
             </div>
             <p className="text-center font-medium">No encontramos productos<br />con esos filtros.</p>
             <button onClick={() => { setCategoria(null); setBusqueda(''); setSort('default'); }}

@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-
-const SEEN_KEY = 'marketsur-onboarding-done';
+import { useState } from 'react';
 
 const SLIDES = [
   {
@@ -37,7 +35,7 @@ export function Onboarding({ onDone }) {
 
   const finish = () => {
     setLeaving(true);
-    localStorage.setItem(SEEN_KEY, '1');
+    localStorage.setItem('marketsur-onboarding-done', '1');
     setTimeout(onDone, 350);
   };
 
@@ -81,9 +79,4 @@ export function Onboarding({ onDone }) {
       </button>
     </div>
   );
-}
-
-export function useOnboarding() {
-  const [show, setShow] = useState(() => !localStorage.getItem(SEEN_KEY));
-  return { show, done: () => setShow(false) };
 }

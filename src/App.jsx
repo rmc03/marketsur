@@ -3,7 +3,8 @@ import { useState, useCallback } from 'react';
 import { useCart } from './hooks/useCart';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useOrderHistory } from './hooks/useOrderHistory';
-import { useOnboarding, Onboarding } from './components/Onboarding';
+import { useOnboarding } from './hooks/useOnboarding';
+import { Onboarding } from './components/Onboarding';
 
 import { Navbar } from './components/Navbar';
 import { Cart } from './components/Cart';

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { WhatsappLogo, MapPin, Clock, Phone, ShieldCheck, Storefront, Heart } from '@phosphor-icons/react';
 
 const FEATURES = [

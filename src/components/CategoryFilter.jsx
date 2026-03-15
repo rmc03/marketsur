@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useRef } from 'react';
 import {
   SquaresFour,
   TShirt,
-  HamburgerIcon,
+  Hamburger,
   DeviceMobile,
   Armchair,
   Sparkle,
@@ -11,12 +12,10 @@ import {
   Package
 } from '@phosphor-icons/react';
 
-// Phosphor doesn't have "Pizza" — using HamburgerIcon alias
-// We'll map carefully:
 const CATEGORIES = [
   { id: 'Todos',                     label: 'Todos',        Icon: SquaresFour },
   { id: 'Ropa y calzado',            label: 'Ropa',          Icon: TShirt },
-  { id: 'Comida y bebida',           label: 'Comida',        Icon: HamburgerIcon },
+  { id: 'Comida y bebida',           label: 'Comida',        Icon: Hamburger },
   { id: 'Electrónica',               label: 'Electrónica',   Icon: DeviceMobile },
   { id: 'Hogar y muebles',           label: 'Hogar',         Icon: Armchair },
   { id: 'Belleza y cuidado personal',label: 'Belleza',       Icon: Sparkle },

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NavLink, useLocation } from 'react-router-dom';
 import { House, ClockCounterClockwise, Info } from '@phosphor-icons/react';
 

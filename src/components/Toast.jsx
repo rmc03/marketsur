@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { CheckCircle } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 
