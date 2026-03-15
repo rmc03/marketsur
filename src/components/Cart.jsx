@@ -1,6 +1,7 @@
 import { X, ShoppingBag, WhatsappLogo } from '@phosphor-icons/react';
 import { CartItem } from './CartItem';
 import { generarMensajeWhatsApp } from '../lib/whatsapp';
+import { RippleButton } from './RippleButton';
 
 export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total, onOrder }) {
   const handleOrder = () => {
@@ -63,13 +64,13 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
               </span>
             </div>
             
-            <button
+            <RippleButton
               onClick={handleOrder}
               className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebd5a] active:bg-[#189b4a] text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-[#25D366]/20 transition-all active:scale-[0.98]"
             >
               <WhatsappLogo className="w-6 h-6" weight="fill" />
               Pedir por WhatsApp
-            </button>
+            </RippleButton>
             <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-3">
               Serás redirigido a WhatsApp para confirmar
             </p>

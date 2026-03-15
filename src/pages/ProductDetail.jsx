@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle, ShareNetwork, CheckCircle } from '@phosphor-icons/react';
+import { RippleButton } from '../components/RippleButton';
 
 export function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
@@ -152,18 +153,23 @@ export function ProductDetail({ onAddToCart }) {
 
       {/* Fixed CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-xl border-t border-slate-200/50 dark:border-[#3E4042]/50 p-4 max-w-lg mx-auto z-40 transition-colors">
-        <button
-          onClick={() => producto.disponible && onAddToCart(producto)}
-          disabled={!producto.disponible}
-          className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg transition-all active:scale-[0.98] ${
-            producto.disponible
-              ? 'bg-[#1877F2] text-white shadow-lg shadow-[#1877F2]/20 hover:bg-[#166FE5]'
-              : 'bg-slate-100 dark:bg-[#3A3B3C] text-slate-400 dark:text-slate-500 cursor-not-allowed border border-slate-200 dark:border-[#3E4042]'
-          }`}
-        >
-          <ShoppingBag className="w-6 h-6" weight="duotone" />
-          {producto.disponible ? 'Añadir al Carrito' : 'Agotado'}
-        </button>
+        {producto.disponible ? (
+          <RippleButton
+            onClick={() => onAddToCart(producto)}
+            className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg transition-transform active:scale-[0.98] bg-[#1877F2] text-white shadow-lg shadow-[#1877F2]/20 hover:bg-[#166FE5]"
+          >
+            <ShoppingBag className="w-6 h-6 pointer-events-none" weight="duotone" />
+            Añadir al Carrito
+          </RippleButton>
+        ) : (
+          <button
+            disabled
+            className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg bg-slate-100 dark:bg-[#3A3B3C] text-slate-400 dark:text-slate-500 cursor-not-allowed border border-slate-200 dark:border-[#3E4042]"
+          >
+            <ShoppingBag className="w-6 h-6" weight="duotone" />
+            Agotado
+          </button>
+        )}
       </div>
     </div>
   );

@@ -3,7 +3,8 @@ import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { ProductCard } from '../components/ProductCard';
-import { Storefront, SortAscending } from '@phosphor-icons/react';
+import { Storefront, SortAscending, MagnifyingGlass, Ghost } from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
 
 const SORT_OPTIONS = [
   { value: 'default',    label: 'Por defecto' },
@@ -24,7 +25,11 @@ function applySort(productos, sort) {
 
 function SkeletonCard() {
   return (
-    <div className="rounded-2xl overflow-hidden border border-slate-100 dark:border-[#3E4042] bg-white dark:bg-[#242526]">
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="rounded-2xl overflow-hidden border border-slate-100 dark:border-[#3E4042] bg-white dark:bg-[#242526]"
+    >
       <div className="aspect-square w-full skeleton-shimmer" />
       <div className="p-4 space-y-2">
         <div className="h-2.5 w-16 rounded-full skeleton-shimmer" />
@@ -35,9 +40,17 @@ function SkeletonCard() {
           <div className="w-9 h-9 rounded-full skeleton-shimmer" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
 
 export function Home({ onAddToCart }) {
   const [categoria, setCategoria] = useState(null);
@@ -121,20 +134,34 @@ export function Home({ onAddToCart }) {
         )}
 
         {cargando ? (
-          <div className="grid grid-cols-2 gap-4 card-stagger">
+          <div className="grid grid-cols-2 gap-4">
             {[1,2,3,4].map(n => <SkeletonCard key={n} />)}
           </div>
         ) : productos.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500">
-            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-[#3A3B3C] flex items-center justify-center mb-4">
-              <Storefront className="w-8 h-8 opacity-30" weight="duotone" />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500"
+          >
+            <div className="relative w-24 h-24 mb-6">
+              <motion.div 
+                animate={{ y: [0, -10, 0] }} 
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                className="w-full h-full rounded-full bg-slate-100 dark:bg-[#3A3B3C] flex items-center justify-center shadow-inner"
+              >
+                {busqueda ? <MagnifyingGlass className="w-10 h-10 text-slate-300" weight="duotone" /> : <Ghost className="w-10 h-10 text-slate-300" weight="duotone" />}
+              </motion.div>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-slate-200 dark:bg-black/20 rounded-full blur-sm" />
             </div>
-            <p className="text-center font-medium">No encontramos productos<br />con esos filtros.</p>
+            <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">¡Ups! Nada por aquí</h3>
+            <p className="text-center font-medium max-w-[250px] text-balance">
+              No encontramos productos que coincidan con tu búsqueda.
+            </p>
             <button onClick={() => { setCategoria(null); setBusqueda(''); setSort('default'); }}
-              className="mt-5 px-6 py-2.5 bg-[#1877F2] text-white rounded-full font-semibold text-sm hover:bg-[#166FE5] transition-colors shadow-md shadow-[#1877F2]/20">
+              className="mt-6 px-8 py-3 bg-[#1877F2] text-white rounded-xl font-bold text-[15px] hover:bg-[#166FE5] transition-all shadow-lg shadow-[#1877F2]/20 active:scale-95">
               Ver todo el catálogo
             </button>
-          </div>
+          </motion.div>
         ) : (
           <>
             {destacados.length > 0 && (
@@ -143,9 +170,12 @@ export function Home({ onAddToCart }) {
                   <span className="text-base font-extrabold text-slate-800 dark:text-[#E4E6EB]">⭐ Destacados</span>
                   <span className="text-xs font-medium text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[#3A3B3C] px-2 py-0.5 rounded-full">{destacados.length}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-5 card-stagger">
+                <motion.div 
+                  variants={containerVariants} initial="hidden" animate="show"
+                  className="grid grid-cols-2 gap-x-4 gap-y-5"
+                >
                   {destacados.map(p => <ProductCard key={p.id} producto={p} onAdd={onAddToCart} />)}
-                </div>
+                </motion.div>
               </div>
             )}
             {resto.length > 0 && (
@@ -158,9 +188,12 @@ export function Home({ onAddToCart }) {
                     <span className="text-xs font-medium text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[#3A3B3C] px-2 py-0.5 rounded-full">{resto.length}</span>
                   </div>
                 )}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-5 card-stagger">
+                <motion.div 
+                  variants={containerVariants} initial="hidden" animate="show"
+                  className="grid grid-cols-2 gap-x-4 gap-y-5"
+                >
                   {resto.map(p => <ProductCard key={p.id} producto={p} onAdd={onAddToCart} />)}
-                </div>
+                </motion.div>
               </div>
             )}
           </>

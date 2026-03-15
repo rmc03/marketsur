@@ -1,5 +1,7 @@
 import { Plus, ShoppingBag } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
+import { RippleButton } from './RippleButton';
+import { motion } from 'framer-motion';
 
 export function ProductCard({ producto, onAdd }) {
   const { id, nombre, precio, categoria, imagen_url, disponible, destacado } = producto;
@@ -11,18 +13,24 @@ export function ProductCard({ producto, onAdd }) {
   };
 
   return (
-    <Link 
-      to={`/producto/${id}`}
-      className="group bg-white dark:bg-[#242526] rounded-2xl border border-slate-100 dark:border-[#3E4042] shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:shadow-[#1877F2]/8 hover:-translate-y-0.5 hover:border-[#1877F2]/30 active:scale-[0.98]"
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      {/* ── Image area ── */}
-      <div className="relative aspect-square w-full bg-slate-50 dark:bg-[#3A3B3C] overflow-hidden">
-        <img 
-          src={imagen_url || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Sin+Imagen'} 
-          alt={nombre}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
-          loading="lazy"
-        />
+      <Link 
+        to={`/producto/${id}`}
+        className="group bg-white dark:bg-[#242526] rounded-2xl border border-slate-100 dark:border-[#3E4042] shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:shadow-[#1877F2]/8 hover:-translate-y-0.5 hover:border-[#1877F2]/30 active:scale-[0.98] h-full"
+      >
+        {/* ── Image area ── */}
+        <div className="relative aspect-square w-full bg-slate-50 dark:bg-[#3A3B3C] overflow-hidden">
+          <img 
+            src={imagen_url || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Sin+Imagen'} 
+            alt={nombre}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+            loading="lazy"
+          />
 
         {/* Gradient overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -62,13 +70,13 @@ export function ProductCard({ producto, onAdd }) {
           </div>
           
           {disponible ? (
-            <button
+            <RippleButton
               onClick={handleAdd}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1877F2] text-white hover:bg-[#166FE5] active:bg-[#145DBF] active:scale-90 transition-all shadow-md shadow-[#1877F2]/30"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1877F2] text-white hover:bg-[#166FE5] shadow-md shadow-[#1877F2]/30 active:scale-90 transition-transform"
               aria-label="Añadir al carrito"
             >
               <Plus className="w-4 h-4 pointer-events-none" weight="bold" />
-            </button>
+            </RippleButton>
           ) : (
             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-[#3A3B3C] text-slate-300 dark:text-slate-600 cursor-not-allowed">
               <ShoppingBag className="w-4 h-4" weight="duotone" />
@@ -76,6 +84,7 @@ export function ProductCard({ producto, onAdd }) {
           )}
         </div>
       </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
