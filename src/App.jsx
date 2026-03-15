@@ -5,6 +5,7 @@ import { useDarkMode } from './hooks/useDarkMode';
 
 import { Navbar } from './components/Navbar';
 import { Cart } from './components/Cart';
+import { FloatingCartButton } from './components/FloatingCartButton';
 import { Footer } from './components/Footer';
 
 import { Home } from './pages/Home';
@@ -54,6 +55,12 @@ function App() {
         </div>
 
         <Footer />
+
+        <FloatingCartButton 
+          cartCount={cantidad}
+          total={total}
+          onOpenCart={() => setIsCartOpen(true)}
+        />
 
         <Cart 
           isOpen={isCartOpen} 
