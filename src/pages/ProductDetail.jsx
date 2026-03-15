@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { MOCK_PRODUCTS } from '../hooks/useProducts';
-import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle } from '@phosphor-icons/react';
+import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle, ShareNetwork, CheckCircle } from '@phosphor-icons/react';
 
 export function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
+  const [shared, setShared] = useState(false);
 
   useEffect(() => {
     async function cargarDetalle() {
@@ -28,6 +28,25 @@ export function ProductDetail({ onAddToCart }) {
     cargarDetalle();
     window.scrollTo(0, 0);
   }, [id]);
+
+  const handleShare = async () => {
+    const shareData = {
+      title: producto?.nombre || 'Producto en Market Sur',
+      text: `¡Mira este producto en Market Sur! ${producto?.nombre} — $${producto?.precio?.toLocaleString('es-AR')} CUP`,
+      url: window.location.href,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        setShared(true);
+        setTimeout(() => setShared(false), 2000);
+      }
+    } catch (e) {
+      // user cancelled share
+    }
+  };
 
   if (cargando) {
     return (
@@ -52,14 +71,30 @@ export function ProductDetail({ onAddToCart }) {
   }
 
   return (
-    <div className="pb-24 animate-fade-in relative min-h-screen bg-slate-50 dark:bg-[#18191A] transition-colors">
-      {/* Back button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 z-10 w-10 h-10 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md text-slate-800 dark:text-[#E4E6EB] rounded-full flex items-center justify-center shadow-sm border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95"
-      >
-        <ArrowLeft className="w-5 h-5" weight="bold" />
-      </button>
+    <div className="pb-28 animate-fade-in relative min-h-screen bg-slate-50 dark:bg-[#18191A] transition-colors">
+      {/* Top action bar */}
+      <div className="absolute top-4 left-0 right-0 px-4 flex justify-between z-10">
+        <button
+          onClick={() => navigate(-1)}
+          className="w-10 h-10 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md text-slate-800 dark:text-[#E4E6EB] rounded-full flex items-center justify-center shadow-sm border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95"
+        >
+          <ArrowLeft className="w-5 h-5" weight="bold" />
+        </button>
+
+        <button
+          onClick={handleShare}
+          className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border transition-all active:scale-95 ${
+            shared
+              ? 'bg-[#1877F2] border-[#1877F2] text-white'
+              : 'bg-white/80 dark:bg-[#242526]/80 border-slate-200 dark:border-[#3E4042] text-slate-700 dark:text-[#E4E6EB] hover:bg-white dark:hover:bg-[#3A3B3C]'
+          }`}
+          aria-label="Compartir producto"
+        >
+          {shared
+            ? <CheckCircle className="w-5 h-5" weight="fill" />
+            : <ShareNetwork className="w-5 h-5" weight="duotone" />}
+        </button>
+      </div>
 
       {/* Image */}
       <div className="relative w-full aspect-[4/5] bg-slate-200 dark:bg-[#3A3B3C]">
@@ -77,7 +112,7 @@ export function ProductDetail({ onAddToCart }) {
         )}
       </div>
 
-      {/* Content card */}
+      {/* Content */}
       <div className="bg-white dark:bg-[#242526] -mt-6 relative z-10 rounded-t-[32px] px-6 pt-8 pb-10 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] min-h-[50vh] transition-colors">
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-2">{producto.nombre}</h1>
         
@@ -120,10 +155,10 @@ export function ProductDetail({ onAddToCart }) {
         <button
           onClick={() => producto.disponible && onAddToCart(producto)}
           disabled={!producto.disponible}
-          className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-[0.98] ${
+          className={`w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg transition-all active:scale-[0.98] ${
             producto.disponible
-              ? 'bg-[#1877F2] text-white shadow-[#1877F2]/20 hover:bg-[#166FE5]'
-              : 'bg-slate-100 dark:bg-[#3A3B3C] text-slate-400 dark:text-slate-500 cursor-not-allowed shadow-none border border-slate-200 dark:border-[#3E4042]'
+              ? 'bg-[#1877F2] text-white shadow-lg shadow-[#1877F2]/20 hover:bg-[#166FE5]'
+              : 'bg-slate-100 dark:bg-[#3A3B3C] text-slate-400 dark:text-slate-500 cursor-not-allowed border border-slate-200 dark:border-[#3E4042]'
           }`}
         >
           <ShoppingBag className="w-6 h-6" weight="duotone" />

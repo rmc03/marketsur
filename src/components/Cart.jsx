@@ -2,12 +2,14 @@ import { X, ShoppingBag, WhatsappLogo } from '@phosphor-icons/react';
 import { CartItem } from './CartItem';
 import { generarMensajeWhatsApp } from '../lib/whatsapp';
 
-export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total }) {
+export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total, onOrder }) {
   if (!isOpen) return null;
 
   const handleOrder = () => {
     if (items.length === 0) return;
+    if (onOrder) onOrder(items, total);
     window.open(generarMensajeWhatsApp(items), '_blank');
+    onClose();
   };
 
   return (
@@ -52,7 +54,9 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
           <div className="p-4 bg-white dark:bg-[#242526] border-t border-slate-100 dark:border-[#3E4042] transition-colors">
             <div className="flex items-center justify-between mb-4">
               <span className="text-slate-600 dark:text-slate-400 font-semibold">Total:</span>
-              <span className="text-2xl font-extrabold text-slate-900 dark:text-white">${total.toLocaleString('es-AR')} <span className="text-sm font-normal text-slate-400">CUP</span></span>
+              <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                ${total.toLocaleString('es-AR')} <span className="text-sm font-normal text-slate-400">CUP</span>
+              </span>
             </div>
             
             <button
