@@ -43,16 +43,21 @@ export function PullToRefresh({ onRefresh, children }) {
         await controls.start({ y: 60, transition: { type: 'spring', stiffness: 300, damping: 20 } });
         
         if (onRefresh) {
+            // First animate it out of view
+            setIsRefreshing(false);
+            await controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            y.set(0);
+            
+            // Then execute the refresh (which might reload the page)
             await onRefresh();
         } else {
             // Fake delay if no callback provided
             await new Promise(r => setTimeout(r, 1500));
+            // Reset
+            setIsRefreshing(false);
+            controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            y.set(0);
         }
-        
-        // Reset
-        setIsRefreshing(false);
-        controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-        y.set(0);
       } else {
         // Cancel pull
         controls.start({ y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } });
@@ -79,12 +84,12 @@ export function PullToRefresh({ onRefresh, children }) {
   return (
     <div ref={containerRef} className="relative w-full h-full flex flex-col items-center">
       <motion.div 
-        className="absolute top-0 left-0 right-0 flex justify-center z-40 pointer-events-none"
+        className="absolute top-0 left-0 right-0 flex justify-center z-[100] pointer-events-none"
         style={{ y: isPulling ? y : undefined }}
         animate={controls}
       >
         <div 
-          className="bg-white dark:bg-[#242526] shadow-lg rounded-full w-10 h-10 flex items-center justify-center -mt-10"
+          className="bg-white dark:bg-[#242526] shadow-xl ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 rounded-full w-10 h-10 flex items-center justify-center -mt-10"
           style={{ opacity: isRefreshing ? 1 : 0.8 }}
         >
           <div className={`w-5 h-5 border-2 border-slate-300 dark:border-slate-600 border-t-[#1877F2] rounded-full ${isRefreshing ? 'animate-spin' : ''}`} 
