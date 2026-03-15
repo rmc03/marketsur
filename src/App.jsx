@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { useCart } from './hooks/useCart';
+import { useDarkMode } from './hooks/useDarkMode';
 
 import { Navbar } from './components/Navbar';
 import { Cart } from './components/Cart';
@@ -11,6 +12,7 @@ import { ProductDetail } from './pages/ProductDetail';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { dark, toggle: toggleDark } = useDarkMode();
   
   const { 
     items, 
@@ -27,13 +29,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex justify-center selection:bg-emerald-500/30">
+    <div className="min-h-screen bg-[#F0F2F5] dark:bg-[#18191A] flex justify-center transition-colors duration-300">
       {/* Mobile container constraint centered on desktop */}
-      <main className="w-full max-w-lg bg-white min-h-screen flex flex-col relative shadow-2xl overflow-hidden ring-1 ring-slate-200/50">
+      <main className="w-full max-w-lg bg-white dark:bg-[#242526] min-h-screen flex flex-col relative shadow-2xl overflow-hidden ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 transition-colors duration-300">
         
         <Navbar 
           cartCount={cantidad} 
-          onOpenCart={() => setIsCartOpen(true)} 
+          onOpenCart={() => setIsCartOpen(true)}
+          dark={dark}
+          onToggleDark={toggleDark}
         />
         
         <div className="flex-1 relative">

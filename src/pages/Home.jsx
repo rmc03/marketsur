@@ -27,7 +27,7 @@ export function Home({ onAddToCart }) {
       </section>
 
       {/* Search and Filter */}
-      <div className="sticky top-[60px] z-30 bg-white/95 backdrop-blur-xl border-b border-slate-100 pb-2 shadow-sm rounded-b-2xl">
+      <div className="sticky top-[60px] z-30 bg-white/95 dark:bg-[#242526]/95 backdrop-blur-xl border-b border-slate-100 dark:border-[#3E4042] pb-2 shadow-sm rounded-b-2xl transition-colors duration-300">
         <SearchBar onSearch={setBusqueda} />
         <CategoryFilter 
           currentCategory={categoria} 
@@ -38,17 +38,17 @@ export function Home({ onAddToCart }) {
       {/* Main Content */}
       <div className="flex-1 px-4 py-6 mb-20">
         <div className="flex items-center justify-between mb-4 px-2">
-          <h2 className="text-lg font-bold text-slate-800">
+          <h2 className="text-lg font-bold text-slate-800 dark:text-[#E4E6EB]">
             {busqueda ? 'Resultados de búsqueda' : (categoria || 'Destacados')}
           </h2>
-          <span className="text-sm font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+          <span className="text-sm font-medium text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-[#3A3B3C] px-2 py-0.5 rounded-full">
             {productos.length} items
           </span>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-amber-50 rounded-xl border border-amber-200">
-            <p className="text-sm text-amber-800 font-medium flex items-center gap-2">
+          <div className="mb-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-700/30">
+            <p className="text-sm text-amber-800 dark:text-amber-300 font-medium flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
               {error}
             </p>
@@ -58,7 +58,7 @@ export function Home({ onAddToCart }) {
         {cargando ? (
           <div className="grid grid-cols-2 gap-4">
             {[1, 2, 3, 4].map(n => (
-              <div key={n} className="bg-slate-100 animate-pulse rounded-2xl aspect-[3/4] w-full" />
+              <div key={n} className="bg-slate-100 dark:bg-[#3A3B3C] animate-pulse rounded-2xl aspect-[3/4] w-full" />
             ))}
           </div>
         ) : productos.length > 0 ? (
@@ -72,12 +72,12 @@ export function Home({ onAddToCart }) {
             ))}
           </div>
         ) : (
-           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+           <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500">
             <RefreshCw className="w-12 h-12 mb-4 opacity-20" />
             <p className="text-center font-medium">No encontramos productos<br/>con esos filtros.</p>
             <button 
               onClick={() => { setCategoria(null); setBusqueda(''); }}
-              className="mt-6 px-6 py-2 bg-slate-100 text-slate-600 rounded-full font-medium hover:bg-slate-200 transition-colors"
+              className="mt-6 px-6 py-2 bg-slate-100 dark:bg-[#3A3B3C] text-slate-600 dark:text-slate-300 rounded-full font-medium hover:bg-slate-200 dark:hover:bg-[#4E4F50] transition-colors"
             >
               Ver todo el catálogo
             </button>

@@ -26,15 +26,15 @@ export function Cart({
         aria-hidden="true"
       />
       
-      <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col pt-safe-top pb-safe-bottom animate-slide-in-right">
-        <div className="flex items-center justify-between p-4 border-b border-slate-100">
-          <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+      <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-50 flex flex-col pt-safe-top pb-safe-bottom animate-slide-in-right transition-colors">
+        <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-[#3E4042]">
+          <h2 className="text-xl font-bold text-slate-800 dark:text-[#E4E6EB] flex items-center gap-2">
             <ShoppingBag className="w-6 h-6 text-[#1877F2]" />
             Tu Carrito
           </h2>
           <button 
             onClick={onClose}
-            className="p-2 -mr-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+            className="p-2 -mr-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#3A3B3C] rounded-full transition-colors"
             aria-label="Cerrar carrito"
           >
             <X className="w-6 h-6" />
@@ -43,7 +43,7 @@ export function Cart({
 
         <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
           {items.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-slate-400 space-y-4">
+            <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 space-y-4">
               <ShoppingBag className="w-16 h-16 opacity-20" />
               <p className="text-center">Tu carrito está vacío.<br/>¡Añade algunos productos!</p>
             </div>
@@ -62,10 +62,10 @@ export function Cart({
         </div>
 
         {items.length > 0 && (
-          <div className="p-4 bg-white border-t border-slate-100 mb-safe">
+          <div className="p-4 bg-white dark:bg-[#242526] border-t border-slate-100 dark:border-[#3E4042] mb-safe transition-colors">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-slate-600 font-medium">Total:</span>
-              <span className="text-2xl font-bold text-slate-900">${total.toLocaleString('es-AR')}</span>
+              <span className="text-slate-600 dark:text-slate-400 font-medium">Total:</span>
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">${total.toLocaleString('es-AR')}</span>
             </div>
             
             <button
@@ -75,7 +75,7 @@ export function Cart({
               <MessageCircle className="w-6 h-6 fill-white" />
               Pedir por WhatsApp
             </button>
-            <p className="text-center text-xs text-slate-400 mt-3 flex items-center justify-center gap-1">
+            <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-3 flex items-center justify-center gap-1">
               Serás redirigido a WhatsApp para confirmar
             </p>
           </div>
