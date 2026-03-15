@@ -49,8 +49,8 @@
 
 @layer utilities {
   .glass-header {
-    @apply bg-white/70 backdrop-blur-xl saturate-150 border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.03)] sticky top-0 z-40;
-    @apply dark:bg-[#18191A]/70 dark:border-white/5 dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)];
+    @apply bg-white border-b border-slate-200/50 shadow-sm sticky top-0 z-40;
+    @apply dark:bg-[#18191A] dark:border-[#3E4042]/50 dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)];
     transition: background-color 0.3s ease;
   }
   

@@ -1,9 +1,9 @@
 import { ShoppingCart, Storefront, Sun, Moon, List } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
-export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSidebar }) {
+export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSidebar, isHome }) {
   return (
-    <nav className="glass-header px-4 py-3 flex items-center justify-between sticky top-0 z-40 transition-all duration-300">
+    <nav className={`glass-header px-4 py-3 flex items-center justify-between sticky top-0 z-40 transition-all duration-300 ${isHome ? '!border-transparent !shadow-none' : ''}`}>
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenSidebar}

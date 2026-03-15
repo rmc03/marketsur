@@ -83,6 +83,7 @@ function App() {
           dark={dark}
           onToggleDark={toggleDark}
           onOpenSidebar={() => setIsSidebarOpen(true)}
+          isHome={location.pathname === '/'}
         />
 
         <Sidebar 
