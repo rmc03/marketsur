@@ -84,7 +84,7 @@ export function Home({ onAddToCart }) {
       </section>
 
       {/* Sticky: Search + Filter + Sort */}
-      <div className="sticky top-[56px] z-50 transform-gpu bg-white dark:bg-[#242526] border-b border-slate-100 dark:border-[#3E4042] pb-2 shadow-sm rounded-b-2xl transition-colors duration-300">
+      <div className="sticky top-[52px] z-50 transform-gpu bg-white dark:bg-[#242526] border-b border-slate-100 dark:border-[#3E4042] pb-2 shadow-sm rounded-b-2xl transition-colors duration-300">
         <SearchBar onSearch={setBusqueda} />
         <div className="flex items-center gap-2 px-4 pb-1">
           <div className="flex-1 overflow-x-auto">

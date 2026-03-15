@@ -38,7 +38,7 @@ function AnimatedPage({ children }) {
       exit="out"
       variants={pageVariants}
       transition={pageTransition}
-      className="absolute inset-0 w-full"
+      className="w-full h-full"
     >
       {children}
     </motion.div>
@@ -72,17 +72,9 @@ function App() {
       {/* Onboarding overlay */}
       {showOnboarding && <Onboarding onDone={doneOnboarding} />}
 
-      <motion.main 
-        drag="y"
-        dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0.1, bottom: 0 }}
-        className="w-full max-w-lg bg-white dark:bg-[#242526] min-h-screen flex flex-col relative shadow-2xl overflow-hidden ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 transition-colors duration-300"
+      <main 
+        className="w-full max-w-lg bg-white dark:bg-[#242526] min-h-screen flex flex-col relative shadow-2xl ring-1 ring-slate-200/50 dark:ring-[#3E4042]/50 transition-colors duration-300"
       >
-        
-        {/* Pull to refresh visual hint behind navbar */}
-        <div className="absolute top-0 left-0 right-0 h-16 flex items-center justify-center -z-10 pointer-events-none opacity-50">
-          <div className="w-6 h-6 border-2 border-slate-300 dark:border-slate-600 border-t-[#1877F2] rounded-full animate-spin" />
-        </div>
         
         <Navbar 
           cartCount={cantidad} 
@@ -126,7 +118,7 @@ function App() {
           onOrder={handleOrder}
         />
         
-      </motion.main>
+      </main>
     </div>
   );
 }
