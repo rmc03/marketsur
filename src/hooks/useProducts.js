@@ -38,7 +38,7 @@ export function useProducts(categoria = null, busqueda = '') {
         }
         
         if (busqueda) {
-          query = query.ilike('nombre', `%${busqueda}%`);
+          query = query.or(`nombre.ilike.%${busqueda}%,descripcion.ilike.%${busqueda}%`);
         }
 
         const { data, error: fetchError } = await query;
@@ -57,7 +57,10 @@ export function useProducts(categoria = null, busqueda = '') {
             filtered = filtered.filter(p => p.categoria === categoria);
           }
           if (busqueda) {
-            filtered = filtered.filter(p => p.nombre.toLowerCase().includes(busqueda.toLowerCase()));
+            filtered = filtered.filter(p => 
+              p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+              p.descripcion.toLowerCase().includes(busqueda.toLowerCase())
+            );
           }
           setProductos(filtered);
           setError("Usando datos de demostración (Supabase no configurado)");

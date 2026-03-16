@@ -66,7 +66,7 @@ export function PullToRefresh({ onRefresh, children }) {
 
       {/* The Visual Spinner entirely detached from page flow */}
       <motion.div 
-        className="fixed top-0 left-0 right-0 flex justify-center z-[110] pointer-events-none"
+        className="fixed top-0 left-0 right-0 flex justify-center z-[115] pointer-events-none"
         initial={{ y: -100 }}
         animate={controls}
       >

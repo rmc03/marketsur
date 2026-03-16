@@ -1,7 +1,22 @@
 import { ShoppingCart, Storefront, Sun, Moon, List } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSidebar, isHome }) {
+  const prevCountRef = useRef(cartCount);
+
+  useEffect(() => {
+    // Animate badge when count increases
+    if (cartCount > prevCountRef.current) {
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.classList.remove('animate-badge-bump');
+        void badge.offsetWidth; // Trigger reflow
+        badge.classList.add('animate-badge-bump');
+      }
+    }
+    prevCountRef.current = cartCount;
+  }, [cartCount]);
   return (
     <nav className={`glass-header px-4 py-3 flex items-center justify-between sticky top-0 z-40 transition-all duration-300 ${isHome ? '!border-transparent !shadow-none' : ''}`}>
       <div className="flex items-center gap-3">
@@ -35,7 +50,10 @@ export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSideba
         >
           <ShoppingCart className="w-6 h-6" weight="duotone" />
           {cartCount > 0 && (
-            <span className="absolute top-0 right-0 -mt-1 -mr-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E41E3F] text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-[#242526] animate-pop-in">
+            <span 
+              id="cart-badge"
+              className="absolute top-0 right-0 -mt-1 -mr-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E41E3F] text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-[#242526] animate-pop-in"
+            >
               {cartCount > 99 ? '99+' : cartCount}
             </span>
           )}

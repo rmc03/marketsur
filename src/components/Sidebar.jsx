@@ -12,7 +12,7 @@ export function Sidebar({ isOpen, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -21,7 +21,7 @@ export function Sidebar({ isOpen, onClose }) {
       
       {/* Drawer */}
       <div 
-        className={`fixed inset-y-0 left-0 w-[280px] bg-white dark:bg-[#242526] shadow-2xl z-[60] flex flex-col transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 left-0 w-[280px] bg-white dark:bg-[#242526] shadow-2xl z-[110] flex flex-col transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

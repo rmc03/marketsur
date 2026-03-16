@@ -59,6 +59,10 @@ function App() {
 
   const handleAddToCart = useCallback((producto) => {
     agregar(producto);
+    // Haptic feedback on mobile devices
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
     setToastKey(k => k + 1);
     setToastVisible(true);
   }, [agregar]);

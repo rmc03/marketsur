@@ -14,7 +14,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
   return (
     <>
       <div
-        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[90] transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -22,7 +22,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
       />
       
       <div 
-        className={`fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-50 flex flex-col transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-[100] flex flex-col transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

@@ -20,7 +20,7 @@ export function Toast({ message, visible }) {
 
   return (
     <div
-      className={`fixed top-20 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-xl text-sm font-bold text-white bg-[#1877F2] pointer-events-none select-none ${
+      className={`fixed top-20 left-1/2 -translate-x-1/2 z-[120] flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-xl text-sm font-bold text-white bg-[#1877F2] pointer-events-none select-none ${
         animating ? 'animate-toast-out' : 'animate-toast-in'
       }`}
     >
