@@ -91,7 +91,11 @@ function App() {
         />
         
         <div className="flex-1 relative overflow-x-clip w-full">
-          <PullToRefresh onRefresh={() => window.location.reload()}>
+          <PullToRefresh onRefresh={async () => {
+            // Wait a bit for the animation to complete before reloading
+            await new Promise(resolve => setTimeout(resolve, 300));
+            window.location.reload();
+          }}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<AnimatedPage><Home onAddToCart={handleAddToCart} /></AnimatedPage>} />

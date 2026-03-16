@@ -12,6 +12,13 @@ export function PullToRefresh({ onRefresh, children }) {
   const MAX_PULL = 120;
   const THRESHOLD = 80;
 
+  // Update spinner position based on pull gesture
+  useMotionValueEvent(y, "change", (latest) => {
+    if (!isRefreshing) {
+      controls.set({ y: latest - 100 });
+    }
+  });
+
   return (
     <div className="relative w-full h-full">
       {/* Invisible drag layer at the top to catch gestures natively via Framer Motion */}
@@ -43,12 +50,12 @@ export function PullToRefresh({ onRefresh, children }) {
               }
             } catch (error) {
               console.error("PullToRefresh error:", error);
-            } finally {
-              // Guaranteed Unmount animation
-              setIsRefreshing(false);
-              await controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
-              y.set(0);
             }
+            
+            // Guaranteed Unmount animation
+            setIsRefreshing(false);
+            await controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
+            y.set(0);
           } else {
             // Cancel and spring back up out of view
             controls.start({ y: -100, transition: { type: 'spring', stiffness: 300, damping: 20 } });
@@ -61,9 +68,6 @@ export function PullToRefresh({ onRefresh, children }) {
       <motion.div 
         className="fixed top-0 left-0 right-0 flex justify-center z-[110] pointer-events-none"
         initial={{ y: -100 }}
-        style={{ y: useMotionValueEvent(y, "change", (latest) => {
-            if(!isRefreshing) controls.set({y: latest - 100}) // Move visual spinner down from hidden start point
-        }) }}
         animate={controls}
       >
         <div 
