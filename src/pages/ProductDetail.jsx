@@ -107,18 +107,10 @@ export function ProductDetail({ onAddToCart }) {
   return (
     <div className="pb-28 animate-fade-in relative min-h-screen bg-slate-50 dark:bg-[#18191A] transition-colors">
       {/* Top action bar */}
-      <div className="absolute top-4 left-0 right-0 px-4 flex justify-between z-[120] pointer-events-none">
-        <Link
-          to="/"
-          className="w-10 h-10 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md text-slate-800 dark:text-[#E4E6EB] rounded-full flex items-center justify-center shadow-sm border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95 pointer-events-auto"
-          aria-label="Volver al inicio"
-        >
-          <ArrowLeft className="w-5 h-5" weight="bold" />
-        </Link>
-
+      <div className="absolute top-4 right-4 z-[120]">
         <button
           onClick={handleShare}
-          className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border transition-all active:scale-95 pointer-events-auto ${
+          className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm border transition-all active:scale-95 ${
             shared
               ? 'bg-[#1877F2] border-[#1877F2] text-white'
               : 'bg-white/80 dark:bg-[#242526]/80 border-slate-200 dark:border-[#3E4042] text-slate-700 dark:text-[#E4E6EB] hover:bg-white dark:hover:bg-[#3A3B3C]'
