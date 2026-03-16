@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle, ShareNetwork, CheckCircle } from '@phosphor-icons/react';
 import { RippleButton } from '../components/RippleButton';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
@@ -10,6 +11,7 @@ export function ProductDetail({ onAddToCart }) {
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [shared, setShared] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     async function cargarDetalle() {
@@ -27,6 +29,7 @@ export function ProductDetail({ onAddToCart }) {
       }
     }
     cargarDetalle();
+    setCurrentImageIndex(0); // Reset image index when product changes
     window.scrollTo(0, 0);
   }, [id]);
 
@@ -48,6 +51,36 @@ export function ProductDetail({ onAddToCart }) {
       console.log('Error sharing:', err);
     }
   };
+
+  // Get images array - support both single imagen_url and multiple imagenes
+  const getImages = () => {
+    if (!producto) return [];
+
+    // If producto has imagenes array (new format)
+    if (producto.imagenes && Array.isArray(producto.imagenes) && producto.imagenes.length > 0) {
+      return producto.imagenes;
+    }
+
+    // Fallback to single imagen_url (old format)
+    if (producto.imagen_url) {
+      return [producto.imagen_url];
+    }
+
+    // Default placeholder
+    return ['https://placehold.co/600x800/e2e8f0/94a3b8?text=Sin+Imagen'];
+  };
+
+  const images = getImages();
+  const hasMultipleImages = images.length > 1;
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
 
   if (cargando) {
     return (
@@ -76,8 +109,13 @@ export function ProductDetail({ onAddToCart }) {
       {/* Top action bar */}
       <div className="absolute top-4 left-0 right-0 px-4 flex justify-between z-10">
         <button
-          onClick={() => navigate(-1)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigate(-1);
+          }}
           className="w-10 h-10 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md text-slate-800 dark:text-[#E4E6EB] rounded-full flex items-center justify-center shadow-sm border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95"
+          aria-label="Volver atrás"
         >
           <ArrowLeft className="w-5 h-5" weight="bold" />
         </button>
@@ -97,15 +135,72 @@ export function ProductDetail({ onAddToCart }) {
         </button>
       </div>
 
-      {/* Image */}
-      <div className="relative w-full aspect-[4/5] bg-slate-200 dark:bg-[#3A3B3C]">
-        <img
-          src={producto.imagen_url || 'https://placehold.co/600x800/e2e8f0/94a3b8?text=Sin+Imagen'}
-          alt={producto.nombre}
-          className="w-full h-full object-cover"
-        />
+      {/* Image Gallery */}
+      <div className="relative w-full aspect-[4/5] bg-slate-200 dark:bg-[#3A3B3C] overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.img
+            key={currentImageIndex}
+            src={images[currentImageIndex]}
+            alt={`${producto.nombre} - Imagen ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.3 }}
+            drag={hasMultipleImages ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = Math.abs(offset.x) * velocity.x;
+              if (swipe < -500) {
+                nextImage();
+              } else if (swipe > 500) {
+                prevImage();
+              }
+            }}
+          />
+        </AnimatePresence>
+
+        {/* Navigation arrows for multiple images */}
+        {hasMultipleImages && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-md border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95 z-10"
+              aria-label="Imagen anterior"
+            >
+              <ArrowLeft className="w-4 h-4" weight="bold" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 dark:bg-[#242526]/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-md border border-slate-200 dark:border-[#3E4042] hover:bg-white dark:hover:bg-[#3A3B3C] transition-all active:scale-95 z-10"
+              aria-label="Imagen siguiente"
+            >
+              <ArrowLeft className="w-4 h-4 rotate-180" weight="bold" />
+            </button>
+          </>
+        )}
+
+        {/* Image indicators */}
+        {hasMultipleImages && (
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-10">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`transition-all ${
+                  index === currentImageIndex
+                    ? 'w-6 h-2 bg-white'
+                    : 'w-2 h-2 bg-white/50 hover:bg-white/75'
+                } rounded-full`}
+                aria-label={`Ver imagen ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
         {!producto.disponible && (
-          <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center">
+          <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-20">
             <div className="bg-white/95 dark:bg-[#242526]/95 px-6 py-2 rounded-full font-bold text-slate-800 dark:text-[#E4E6EB] shadow-xl tracking-wide uppercase text-sm">
               Agotado
             </div>
