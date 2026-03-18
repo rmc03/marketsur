@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NavLink } from 'react-router-dom';
 import { X, House, ClockCounterClockwise, Info, Storefront } from '@phosphor-icons/react';
 
@@ -53,12 +54,15 @@ export function Sidebar({ isOpen, onClose }) {
                 }
               `}
             >
-              {({ isActive }) => (
-                <>
-                  <Icon className="w-6 h-6" weight={isActive ? 'fill' : 'duotone'} />
-                  {label}
-                </>
-              )}
+              {({ isActive }) => {
+                const Icon = MENU_ITEMS.find(item => item.to === to)?.Icon;
+                return (
+                  <>
+                    {Icon && <Icon className="w-6 h-6" weight={isActive ? 'fill' : 'duotone'} />}
+                    {label}
+                  </>
+                );
+              }}
             </NavLink>
           ))}
         </nav>

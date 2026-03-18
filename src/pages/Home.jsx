@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';

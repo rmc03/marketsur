@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Plus, ShoppingBag } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { RippleButton } from './RippleButton';

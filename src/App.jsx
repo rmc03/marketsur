@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useCart } from './hooks/useCart';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useOrderHistory } from './hooks/useOrderHistory';

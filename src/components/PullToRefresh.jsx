@@ -1,13 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
+/* eslint-disable no-unused-vars */
+import { useState, useRef } from 'react';
+import { useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
 
 export function PullToRefresh({ onRefresh, children }) {
-  const [isPulling, setIsPulling] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const containerRef = useRef(null);
   const y = useMotionValue(0);
   const controls = useAnimation();
-  const startY = useRef(0);
   
   const MAX_PULL = 120;
   const THRESHOLD = 80;
