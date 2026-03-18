@@ -2,9 +2,10 @@ import { Plus, ShoppingBag } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { RippleButton } from './RippleButton';
 import { motion } from 'framer-motion';
+import { getProductMainImage } from '../lib/images';
 
 export function ProductCard({ producto, onAdd }) {
-  const { id, nombre, precio, categoria, imagen_url, disponible, destacado } = producto;
+  const { id, nombre, precio, categoria, disponible, destacado } = producto;
   
   const handleAdd = (e) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export function ProductCard({ producto, onAdd }) {
         {/* ── Image area ── */}
         <div className="relative aspect-square w-full bg-slate-50 dark:bg-[#3A3B3C] overflow-hidden">
           <img 
-            src={imagen_url || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Sin+Imagen'} 
+            src={getProductMainImage(producto)} 
             alt={nombre}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
             loading="lazy"

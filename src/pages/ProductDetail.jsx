@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { getProductImages } from '../lib/images';
 import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle, ShareNetwork, CheckCircle } from '@phosphor-icons/react';
 import { RippleButton } from '../components/RippleButton';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [shared, setShared] = useState(false);
@@ -53,24 +53,7 @@ export function ProductDetail({ onAddToCart }) {
   };
 
   // Get images array - support both single imagen_url and multiple imagenes
-  const getImages = () => {
-    if (!producto) return [];
-
-    // If producto has imagenes array (new format)
-    if (producto.imagenes && Array.isArray(producto.imagenes) && producto.imagenes.length > 0) {
-      return producto.imagenes;
-    }
-
-    // Fallback to single imagen_url (old format)
-    if (producto.imagen_url) {
-      return [producto.imagen_url];
-    }
-
-    // Default placeholder
-    return ['https://placehold.co/600x800/e2e8f0/94a3b8?text=Sin+Imagen'];
-  };
-
-  const images = getImages();
+  const images = getProductImages(producto);
   const hasMultipleImages = images.length > 1;
 
   const nextImage = () => {
@@ -97,9 +80,9 @@ export function ProductDetail({ onAddToCart }) {
         <WarningCircle className="w-16 h-16 text-slate-300 dark:text-slate-600 mb-4" weight="duotone" />
         <h2 className="text-xl font-extrabold text-slate-800 dark:text-[#E4E6EB] mb-2">Producto no encontrado</h2>
         <p className="text-slate-500 dark:text-slate-400 mb-8">El producto que buscas no existe o ha sido retirado.</p>
-        <button onClick={() => navigate('/')} className="bg-[#1877F2] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#166FE5] transition shadow-md shadow-[#1877F2]/20">
+        <Link to="/" className="bg-[#1877F2] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#166FE5] transition shadow-md shadow-[#1877F2]/20">
           Volver al catálogo
-        </button>
+        </Link>
       </div>
     );
   }

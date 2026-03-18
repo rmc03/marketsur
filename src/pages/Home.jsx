@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
@@ -61,6 +61,14 @@ export function Home({ onAddToCart }) {
   const { productos: rawProductos, cargando, error } = useProducts(categoria, busqueda);
   const productos = applySort(rawProductos, sort);
 
+  // Close sort dropdown when clicking outside
+  useEffect(() => {
+    if (!showSort) return;
+    const handleClick = () => setShowSort(false);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, [showSort]);
+
   const hasFilters = busqueda || categoria;
   const destacados = !hasFilters ? productos.filter(p => p.destacado) : [];
   const resto      = !hasFilters ? productos.filter(p => !p.destacado) : productos;
@@ -93,7 +101,7 @@ export function Home({ onAddToCart }) {
           {/* Sort button */}
           <div className="relative flex-shrink-0">
             <button
-              onClick={() => setShowSort(s => !s)}
+              onClick={(e) => { e.stopPropagation(); setShowSort(s => !s); }}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-full border text-sm font-semibold transition-all ${
                 sort !== 'default'
                   ? 'bg-[#1877F2] text-white border-[#1877F2]'
