@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Plus, ShoppingBag } from '@phosphor-icons/react';
+import { Plus, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { RippleButton } from './RippleButton';
 import { motion } from 'framer-motion';
@@ -77,11 +77,11 @@ export function ProductCard({ producto, onAdd }) {
               className="flex items-center justify-center w-9 h-9 rounded-full gradient-primary text-white shadow-md shadow-indigo-500/25 active:scale-90 transition-transform ring-1 ring-white/20"
               aria-label="Añadir al carrito"
             >
-              <Plus className="w-4 h-4 pointer-events-none" weight="bold" />
+              <Plus className="w-4 h-4 pointer-events-none" />
             </RippleButton>
           ) : (
             <div className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100/80 dark:bg-white/[0.06] text-slate-300 dark:text-slate-600 cursor-not-allowed">
-              <ShoppingBag className="w-4 h-4" weight="duotone" />
+              <ShoppingBag className="w-4 h-4" />
             </div>
           )}
         </div>

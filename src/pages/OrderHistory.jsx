@@ -1,5 +1,5 @@
 import { useOrderHistory } from '../hooks/useOrderHistory';
-import { ClockCounterClockwise, Trash, WhatsappLogo, ShoppingBag } from '@phosphor-icons/react';
+import { Clock, Trash2, MessageCircle, ShoppingBag } from 'lucide-react';
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -26,7 +26,7 @@ export function OrderHistory() {
       {/* Header */}
       <div className="px-5 pt-6 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ClockCounterClockwise className="w-6 h-6 gradient-text" weight="duotone" />
+          <Clock className="w-6 h-6 gradient-text" />
           <h1 className="text-xl font-extrabold text-slate-800 dark:text-slate-100">Historial de Pedidos</h1>
         </div>
         {orders.length > 0 && (
@@ -34,7 +34,7 @@ export function OrderHistory() {
             onClick={clearHistory}
             className="flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-600 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 px-3 py-1.5 rounded-full transition-colors"
           >
-            <Trash className="w-3.5 h-3.5" weight="bold" />
+            <Trash2 className="w-3.5 h-3.5" />
             Limpiar
           </button>
         )}
@@ -44,7 +44,7 @@ export function OrderHistory() {
       {orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
           <div className="w-20 h-20 rounded-2xl glass-card flex items-center justify-center mb-5">
-            <ShoppingBag className="w-10 h-10 text-slate-300 dark:text-slate-600" weight="duotone" />
+            <ShoppingBag className="w-10 h-10 text-slate-300 dark:text-slate-600" />
           </div>
           <h2 className="text-lg font-extrabold text-slate-700 dark:text-slate-200 mb-2">Sin pedidos aún</h2>
           <p className="text-slate-400 dark:text-slate-500 text-sm leading-relaxed max-w-[240px]">
@@ -91,7 +91,7 @@ export function OrderHistory() {
                   onClick={() => reorder(order)}
                   className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd5a] text-white font-bold text-sm py-2.5 rounded-xl shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] ring-1 ring-white/20"
                 >
-                  <WhatsappLogo className="w-4 h-4" weight="fill" />
+                  <MessageCircle className="w-4 h-4" />
                   Repetir pedido
                 </button>
               </div>

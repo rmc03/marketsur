@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { WhatsappLogo, MapPin, Clock, Storefront, Heart } from '@phosphor-icons/react';
+import { MessageCircle, MapPin, Clock, Store, Heart } from 'lucide-react';
 
 const FEATURES = [
-  { Icon: Storefront,   title: 'Catálogo digital',     desc: 'Explora cientos de productos locales desde tu móvil, organizados por categorías.' },
-  { Icon: WhatsappLogo, title: 'Pedidos por WhatsApp', desc: 'Sin registros, sin contraseñas. Un toque y tu pedido llega directo al vendedor.' },
+  { Icon: Store,   title: 'Catálogo digital',     desc: 'Explora cientos de productos locales desde tu móvil, organizados por categorías.' },
+  { Icon: MessageCircle, title: 'Pedidos por WhatsApp', desc: 'Sin registros, sin contraseñas. Un toque y tu pedido llega directo al vendedor.' },
   { Icon: MapPin,       title: 'Productos locales',    desc: 'Todo de vendedores en Cienfuegos. Apoya la economía de tu ciudad.' },
   { Icon: Heart,        title: 'Seguro y confiable',   desc: 'Tratas directamente con el vendedor sin intermediarios ni comisiones.' },
 ];
@@ -26,7 +26,7 @@ export function About() {
         
         <div className="relative z-10">
           <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-white/30">
-            <Storefront className="w-8 h-8 text-white" weight="duotone" />
+            <Store className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-extrabold mb-2">Sobre Market Sur</h1>
           <p className="text-white/80 text-sm leading-relaxed max-w-[280px] mx-auto">
@@ -43,7 +43,7 @@ export function About() {
             {FEATURES.map(({ Icon, title, desc }) => (
               <div key={title} className="glass-card rounded-2xl p-4">
                 <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center mb-3 shadow-md shadow-indigo-500/20 ring-1 ring-white/20">
-                  <Icon className="w-5 h-5 text-white" weight="duotone" />
+                  <Icon className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm mb-1">{title}</h3>
                 <p className="text-slate-500 dark:text-slate-400 text-xs leading-snug">{desc}</p>
@@ -77,15 +77,15 @@ export function About() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-3 bg-[#25D366] hover:bg-[#1ebd5a] rounded-xl text-white font-bold text-sm transition-colors shadow-lg shadow-green-500/20 ring-1 ring-white/20"
             >
-              <WhatsappLogo className="w-5 h-5" weight="fill" />
+              <MessageCircle className="w-5 h-5" />
               WhatsApp: +53 5377 0707
             </a>
             <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-sm">
-              <MapPin className="w-5 h-5 gradient-text flex-shrink-0" weight="duotone" />
+              <MapPin className="w-5 h-5 gradient-text flex-shrink-0" />
               <span>Cienfuegos, Cuba</span>
             </div>
             <div className="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-sm">
-              <Clock className="w-5 h-5 gradient-text flex-shrink-0" weight="duotone" />
+              <Clock className="w-5 h-5 gradient-text flex-shrink-0" />
               <span>Disponible todos los días, 8am – 10pm</span>
             </div>
           </div>
@@ -93,7 +93,7 @@ export function About() {
 
         {/* Footer credit */}
         <p className="text-center text-slate-400 dark:text-slate-500 text-xs flex items-center justify-center gap-1 pb-2">
-          Hecho con <Heart className="w-3 h-3 text-rose-500" weight="fill" /> para Cienfuegos — Market Sur © {new Date().getFullYear()}
+          Hecho con <Heart className="w-3 h-3 text-rose-500" fill="currentColor" /> para Cienfuegos — Market Sur © {new Date().getFullYear()}
         </p>
       </div>
     </div>

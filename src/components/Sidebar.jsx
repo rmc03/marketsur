@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { NavLink } from 'react-router-dom';
-import { X, House, ClockCounterClockwise, Info, Storefront } from '@phosphor-icons/react';
+import { X, House, Clock, Info, Store } from 'lucide-react';
 
 const MENU_ITEMS = [
   { to: '/',          label: 'Inicio',    Icon: House },
-  { to: '/historial', label: 'Mis Pedidos',   Icon: ClockCounterClockwise },
+  { to: '/historial', label: 'Mis Pedidos',   Icon: Clock },
   { to: '/nosotros',  label: 'Sobre Nosotros',  Icon: Info },
 ];
 
@@ -33,7 +33,7 @@ export function Sidebar({ isOpen, onClose }) {
           <div className="relative z-10 flex items-center justify-between p-5">
             <div className="flex items-center gap-2 text-white">
               <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg ring-1 ring-white/20">
-                <Storefront className="w-5 h-5" weight="fill" />
+                <Store className="w-5 h-5" />
               </div>
               <span className="font-extrabold text-xl tracking-tight">Market Sur</span>
             </div>
@@ -42,7 +42,7 @@ export function Sidebar({ isOpen, onClose }) {
               className="p-1.5 -mr-1.5 text-white/70 hover:text-white hover:bg-white/20 rounded-full transition-colors"
               aria-label="Cerrar menú"
             >
-              <X className="w-6 h-6" weight="bold" />
+              <X className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -65,7 +65,7 @@ export function Sidebar({ isOpen, onClose }) {
                 const Icon = MENU_ITEMS.find(item => item.to === to)?.Icon;
                 return (
                   <>
-                    {Icon && <Icon className="w-6 h-6" weight={isActive ? 'fill' : 'duotone'} />}
+                    {Icon && <Icon className="w-6 h-6" />}
                     {label}
                   </>
                 );

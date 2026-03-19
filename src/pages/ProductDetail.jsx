@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { getProductImages } from '../lib/images';
-import { ArrowLeft, ShoppingBag, Truck, Info, WarningCircle, ShareNetwork, CheckCircle } from '@phosphor-icons/react';
+import { ArrowLeft, ShoppingBag, Truck, Info, AlertCircle, Share2, CheckCircle } from 'lucide-react';
 import { RippleButton } from '../components/RippleButton';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -78,7 +78,7 @@ export function ProductDetail({ onAddToCart }) {
   if (!producto) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
-        <WarningCircle className="w-16 h-16 text-slate-300 dark:text-slate-600 mb-4" weight="duotone" />
+        <AlertCircle className="w-16 h-16 text-slate-300 dark:text-slate-600 mb-4" />
         <h2 className="text-xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">Producto no encontrado</h2>
         <p className="text-slate-500 dark:text-slate-400 mb-8">El producto que buscas no existe o ha sido retirado.</p>
         <Link to="/" className="gradient-primary text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition shadow-lg shadow-indigo-500/20">
@@ -102,8 +102,8 @@ export function ProductDetail({ onAddToCart }) {
           aria-label="Compartir producto"
         >
           {shared
-            ? <CheckCircle className="w-5 h-5" weight="fill" />
-            : <ShareNetwork className="w-5 h-5" weight="duotone" />}
+            ? <CheckCircle className="w-5 h-5" />
+            : <Share2 className="w-5 h-5" />}
         </button>
       </div>
 
@@ -142,14 +142,14 @@ export function ProductDetail({ onAddToCart }) {
               className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/70 dark:bg-white/[0.08] backdrop-blur-xl rounded-full flex items-center justify-center shadow-lg border border-white/30 dark:border-white/[0.1] hover:bg-white/90 dark:hover:bg-white/[0.15] transition-all active:scale-95 z-10"
               aria-label="Imagen anterior"
             >
-              <ArrowLeft className="w-4 h-4" weight="bold" />
+              <ArrowLeft className="w-4 h-4" />
             </button>
             <button
               onClick={nextImage}
               className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/70 dark:bg-white/[0.08] backdrop-blur-xl rounded-full flex items-center justify-center shadow-lg border border-white/30 dark:border-white/[0.1] hover:bg-white/90 dark:hover:bg-white/[0.15] transition-all active:scale-95 z-10"
               aria-label="Imagen siguiente"
             >
-              <ArrowLeft className="w-4 h-4 rotate-180" weight="bold" />
+              <ArrowLeft className="w-4 h-4 rotate-180" />
             </button>
           </>
         )}
@@ -199,7 +199,7 @@ export function ProductDetail({ onAddToCart }) {
         <div className="space-y-5">
           <div>
             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2">
-              <Info className="w-5 h-5 gradient-text" weight="duotone" />
+              <Info className="w-5 h-5 gradient-text" />
               Descripción
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px]">
@@ -209,7 +209,7 @@ export function ProductDetail({ onAddToCart }) {
 
           <div className="glass-surface rounded-2xl p-4 flex items-start gap-3">
             <div className="bg-white/60 dark:bg-white/[0.06] backdrop-blur-xl rounded-full p-2 shadow-sm ring-1 ring-white/30 dark:ring-white/[0.05]">
-              <Truck className="w-5 h-5 text-indigo-500" weight="duotone" />
+              <Truck className="w-5 h-5 text-indigo-500" />
             </div>
             <div>
               <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm">Envío y entrega</h4>
@@ -226,7 +226,7 @@ export function ProductDetail({ onAddToCart }) {
             onClick={() => onAddToCart(producto)}
             className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg transition-transform active:scale-[0.98] gradient-primary text-white shadow-lg shadow-indigo-500/20 hover:opacity-90"
           >
-            <ShoppingBag className="w-6 h-6 pointer-events-none" weight="duotone" />
+            <ShoppingBag className="w-6 h-6 pointer-events-none" />
             Añadir al Carrito
           </RippleButton>
         ) : (
@@ -234,7 +234,7 @@ export function ProductDetail({ onAddToCart }) {
             disabled
             className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-lg bg-slate-100/80 dark:bg-white/[0.06] text-slate-400 dark:text-slate-500 cursor-not-allowed border border-white/40 dark:border-white/[0.06]"
           >
-            <ShoppingBag className="w-6 h-6" weight="duotone" />
+            <ShoppingBag className="w-6 h-6" />
             Agotado
           </button>
         )}

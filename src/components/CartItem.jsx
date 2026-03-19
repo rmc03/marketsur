@@ -1,4 +1,4 @@
-import { Minus, Plus, Trash } from '@phosphor-icons/react';
+import { Minus, Plus, Trash2 } from 'lucide-react';
 
 export function CartItem({ item, onUpdateQuantity, onRemove }) {
   const { id, nombre, precio, imagen_url, cantidad } = item;
@@ -24,7 +24,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }) {
           className="text-slate-400 dark:text-slate-500 hover:text-red-500 transition-colors p-1"
           aria-label="Eliminar producto"
         >
-          <Trash className="w-4 h-4" weight="duotone" />
+          <Trash2 className="w-4 h-4" />
         </button>
         
         <div className="flex items-center gap-1.5 bg-white/50 dark:bg-white/[0.04] backdrop-blur-xl rounded-lg p-0.5 ring-1 ring-white/30 dark:ring-white/[0.05]">
@@ -33,7 +33,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }) {
             disabled={cantidad <= 1}
             className="w-7 h-7 flex items-center justify-center rounded-md bg-white dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 shadow-sm disabled:opacity-40 disabled:shadow-none transition-all hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
           >
-            <Minus className="w-3 h-3" weight="bold" />
+            <Minus className="w-3 h-3" />
           </button>
           
           <span className="text-sm font-bold w-5 text-center text-slate-800 dark:text-slate-100">{cantidad}</span>
@@ -42,7 +42,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }) {
             onClick={() => onUpdateQuantity(id, 1)}
             className="w-7 h-7 flex items-center justify-center rounded-md bg-white dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 shadow-sm transition-all hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
           >
-            <Plus className="w-3 h-3" weight="bold" />
+            <Plus className="w-3 h-3" />
           </button>
         </div>
       </div>

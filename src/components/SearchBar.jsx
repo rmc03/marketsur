@@ -1,4 +1,4 @@
-import { MagnifyingGlass, X } from '@phosphor-icons/react';
+import { Search, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function SearchBar({ onSearch }) {
@@ -17,9 +17,8 @@ export function SearchBar({ onSearch }) {
   return (
     <div className="px-4 py-2 w-full">
       <div className="relative flex items-center w-full group">
-        <MagnifyingGlass
+        <Search
           className="absolute left-3 w-5 h-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-500 transition-colors"
-          weight="bold"
         />
         <input
           type="text"
@@ -33,7 +32,7 @@ export function SearchBar({ onSearch }) {
             onClick={handleClear}
             className="absolute right-3 p-1 rounded-full text-slate-400 dark:text-slate-500 hover:bg-white/50 dark:hover:bg-white/[0.1] hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
           >
-            <X className="w-4 h-4" weight="bold" />
+            <X className="w-4 h-4" />
           </button>
         )}
       </div>

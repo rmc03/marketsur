@@ -1,4 +1,4 @@
-import { X, ShoppingBag, WhatsappLogo } from '@phosphor-icons/react';
+import { X, ShoppingBag, MessageCircle } from 'lucide-react';
 import { CartItem } from './CartItem';
 import { generarMensajeWhatsApp } from '../lib/whatsapp';
 import { RippleButton } from './RippleButton';
@@ -31,7 +31,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
         
         <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-white/[0.08]">
           <h2 className="text-xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <ShoppingBag className="w-6 h-6 gradient-text" weight="duotone" />
+            <ShoppingBag className="w-6 h-6 gradient-text" />
             Tu Carrito
           </h2>
           <button
@@ -39,14 +39,14 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
             className="p-2 -mr-2 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-white/[0.06] rounded-full transition-colors"
             aria-label="Cerrar carrito"
           >
-            <X className="w-6 h-6" weight="bold" />
+            <X className="w-6 h-6" />
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 space-y-4">
-              <ShoppingBag className="w-16 h-16 opacity-20" weight="duotone" />
+              <ShoppingBag className="w-16 h-16 opacity-20" />
               <p className="text-center font-medium">Tu carrito está vacío.<br />¡Añade algunos productos!</p>
             </div>
           ) : (
@@ -71,7 +71,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
               onClick={handleOrder}
               className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#22c55e] active:bg-[#1ea855] text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] ring-1 ring-white/20"
             >
-              <WhatsappLogo className="w-6 h-6" weight="fill" />
+              <MessageCircle className="w-6 h-6" />
               Pedir por WhatsApp
             </RippleButton>
             <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-3">

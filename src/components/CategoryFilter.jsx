@@ -1,27 +1,27 @@
 /* eslint-disable no-unused-vars */
 import { useRef } from 'react';
 import {
-  SquaresFour,
-  TShirt,
-  Hamburger,
-  DeviceMobile,
+  LayoutGrid,
+  Shirt,
+  Utensils,
+  Smartphone,
   Armchair,
-  Sparkle,
+  Sparkles,
   Wrench,
-  GameController,
+  Gamepad2,
   Package
-} from '@phosphor-icons/react';
+} from 'lucide-react';
 
 const CATEGORIES = [
-  { id: 'Todos',                     label: 'Todos',        Icon: SquaresFour },
-  { id: 'Ropa y calzado',            label: 'Ropa',          Icon: TShirt },
-  { id: 'Comida y bebida',           label: 'Comida',        Icon: Hamburger },
-  { id: 'Electrónica',               label: 'Electrónica',   Icon: DeviceMobile },
+  { id: 'Todos',                     label: 'Todos',        Icon: LayoutGrid },
+  { id: 'Ropa y calzado',            label: 'Ropa',          Icon: Shirt },
+  { id: 'Comida y bebida',           label: 'Comida',        Icon: Utensils },
+  { id: 'Electrónica',               label: 'Electrónica',   Icon: Smartphone },
   { id: 'Hogar y muebles',           label: 'Hogar',         Icon: Armchair },
-  { id: 'Belleza y cuidado personal',label: 'Belleza',       Icon: Sparkle },
+  { id: 'Belleza y cuidado personal',label: 'Belleza',       Icon: Sparkles },
   { id: 'Servicios',                 label: 'Servicios',     Icon: Wrench },
-  { id: 'Juguetes',                  label: 'Juguetes',      Icon: GameController },
-  { id: 'Otros / variado',           label: 'Otros',         Icon: Package },
+  { id: 'Juguetes',                  label: 'Juguetes',      Icon: Gamepad2 },
+  { id: 'Otros / variados',           label: 'Otros',         Icon: Package },
 ];
 
 export function CategoryFilter({ currentCategory, onSelectCategory }) {
@@ -47,7 +47,6 @@ export function CategoryFilter({ currentCategory, onSelectCategory }) {
             >
               <Icon
                 className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-500 dark:text-slate-400'}`}
-                weight={isActive ? 'fill' : 'duotone'}
               />
               {label}
             </button>

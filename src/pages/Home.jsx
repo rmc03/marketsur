@@ -4,7 +4,7 @@ import { useProducts } from '../hooks/useProducts';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { ProductCard } from '../components/ProductCard';
-import { Storefront, SortAscending, MagnifyingGlass, Ghost } from '@phosphor-icons/react';
+import { Store, ArrowUpDown, Search, Ghost } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const SORT_OPTIONS = [
@@ -86,7 +86,7 @@ export function Home({ onAddToCart }) {
         
         <div className="relative z-10 flex flex-col items-center text-center mt-2">
           <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-white/10 ring-1 ring-white/30">
-            <Storefront className="w-7 h-7 text-white" weight="duotone" />
+            <Store className="w-7 h-7 text-white" />
           </div>
           <h1 className="text-3xl font-extrabold mb-2 tracking-tight drop-shadow-sm">Market Sur</h1>
           <p className="text-white/80 text-sm max-w-[260px] text-balance leading-relaxed">
@@ -113,7 +113,7 @@ export function Home({ onAddToCart }) {
               }`}
               aria-label="Ordenar"
             >
-              <SortAscending className="w-4 h-4" weight="bold" />
+              <ArrowUpDown className="w-4 h-4" />
             </button>
             {showSort && (
               <div className="absolute right-0 top-full mt-2 w-52 glass-panel rounded-2xl z-50 overflow-hidden animate-pop-in">
@@ -161,7 +161,7 @@ export function Home({ onAddToCart }) {
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                 className="w-full h-full rounded-full glass-card flex items-center justify-center"
               >
-                {busqueda ? <MagnifyingGlass className="w-10 h-10 text-slate-300 dark:text-slate-600" weight="duotone" /> : <Ghost className="w-10 h-10 text-slate-300 dark:text-slate-600" weight="duotone" />}
+                {busqueda ? <Search className="w-10 h-10 text-slate-300 dark:text-slate-600" /> : <Ghost className="w-10 h-10 text-slate-300 dark:text-slate-600" />}
               </motion.div>
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-indigo-200/30 dark:bg-indigo-500/10 rounded-full blur-sm" />
             </div>

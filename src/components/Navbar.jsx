@@ -1,4 +1,4 @@
-import { ShoppingCart, Storefront, Sun, Moon, List } from '@phosphor-icons/react';
+import { ShoppingCart, Store, Sun, Moon, List, Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 
@@ -26,11 +26,11 @@ export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSideba
           className="p-1.5 -ml-1 text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/[0.08] rounded-xl transition-all active:scale-95 backdrop-blur-sm"
           aria-label="Abrir menú"
         >
-          <List className="w-6 h-6" weight="bold" />
+          <Menu className="w-6 h-6" />
         </button>
         <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity -ml-1">
           <div className="w-8 h-8 rounded-xl gradient-primary flex items-center justify-center shadow-md shadow-indigo-500/20">
-            <Storefront className="w-4.5 h-4.5 text-white" weight="fill" />
+            <Store className="w-4.5 h-4.5 text-white" />
           </div>
           <span className="font-extrabold text-xl tracking-tight leading-none gradient-text">Market Sur</span>
         </Link>
@@ -42,8 +42,8 @@ export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSideba
           aria-label="Cambiar tema"
         >
           {dark
-            ? <Sun className="w-5 h-5" weight="duotone" />
-            : <Moon className="w-5 h-5" weight="duotone" />}
+            ? <Sun className="w-5 h-5" />
+            : <Moon className="w-5 h-5" />}
         </button>
 
         <button 
@@ -51,7 +51,7 @@ export function Navbar({ onOpenCart, cartCount, dark, onToggleDark, onOpenSideba
           className="relative p-2 text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-white/[0.08] rounded-full transition-all active:scale-95"
           aria-label="Ver carrito"
         >
-          <ShoppingCart className="w-6 h-6" weight="duotone" />
+          <ShoppingCart className="w-6 h-6" />
           {cartCount > 0 && (
             <span 
               id="cart-badge"

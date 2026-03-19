@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { CheckCircle } from '@phosphor-icons/react';
+import { CheckCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function Toast({ message, visible }) {
@@ -26,7 +26,7 @@ export function Toast({ message, visible }) {
     >
       {/* Gradient accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl gradient-primary" />
-      <CheckCircle className="w-4 h-4 shrink-0 text-white" weight="fill" />
+      <CheckCircle className="w-4 h-4 shrink-0 text-white" />
       {message}
     </div>
   );
