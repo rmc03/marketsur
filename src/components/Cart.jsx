@@ -14,7 +14,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
   return (
     <>
       <div
-        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[90] transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[90] transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -22,18 +22,21 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
       />
       
       <div 
-        className={`fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-[#242526] shadow-2xl z-[100] flex flex-col transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 w-full max-w-md glass-panel shadow-2xl z-[100] flex flex-col transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-[#3E4042]">
-          <h2 className="text-xl font-extrabold text-slate-800 dark:text-[#E4E6EB] flex items-center gap-2">
-            <ShoppingBag className="w-6 h-6 text-[#1877F2]" weight="duotone" />
+        {/* Gradient accent top border */}
+        <div className="h-1 gradient-primary" />
+        
+        <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-white/[0.08]">
+          <h2 className="text-xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <ShoppingBag className="w-6 h-6 gradient-text" weight="duotone" />
             Tu Carrito
           </h2>
           <button
             onClick={onClose}
-            className="p-2 -mr-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#3A3B3C] rounded-full transition-colors"
+            className="p-2 -mr-2 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-white/[0.06] rounded-full transition-colors"
             aria-label="Cerrar carrito"
           >
             <X className="w-6 h-6" weight="bold" />
@@ -56,7 +59,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
         </div>
 
         {items.length > 0 && (
-          <div className="p-4 bg-white dark:bg-[#242526] border-t border-slate-100 dark:border-[#3E4042] transition-colors">
+          <div className="p-4 glass-surface border-t border-white/20 dark:border-white/[0.08] transition-colors">
             <div className="flex items-center justify-between mb-4">
               <span className="text-slate-600 dark:text-slate-400 font-semibold">Total:</span>
               <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -66,7 +69,7 @@ export function Cart({ isOpen, onClose, items, onUpdateQuantity, onRemove, total
             
             <RippleButton
               onClick={handleOrder}
-              className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebd5a] active:bg-[#189b4a] text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-[#25D366]/20 transition-all active:scale-[0.98]"
+              className="w-full flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#22c55e] active:bg-[#1ea855] text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] ring-1 ring-white/20"
             >
               <WhatsappLogo className="w-6 h-6" weight="fill" />
               Pedir por WhatsApp

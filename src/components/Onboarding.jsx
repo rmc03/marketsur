@@ -5,19 +5,19 @@ const SLIDES = [
     emoji: '🛒',
     title: '¡Bienvenido a Market Sur!',
     desc: 'El mercadillo digital de Cienfuegos. Encuentra productos locales a precios increíbles.',
-    bg: 'from-[#1877F2] to-[#0e58c8]',
+    bg: 'from-indigo-600 via-blue-600 to-cyan-500',
   },
   {
     emoji: '🔍',
     title: 'Explora y descubre',
     desc: 'Navega por categorías, busca lo que necesitas y filtra por tipo de producto.',
-    bg: 'from-[#6D28D9] to-[#1877F2]',
+    bg: 'from-violet-600 via-purple-600 to-indigo-500',
   },
   {
     emoji: '💬',
     title: 'Pide por WhatsApp',
     desc: 'Añade productos al carrito y envía tu pedido directamente al vendedor por WhatsApp.',
-    bg: 'from-[#047857] to-[#0e58c8]',
+    bg: 'from-emerald-600 via-teal-600 to-cyan-500',
   },
 ];
 
@@ -45,6 +45,11 @@ export function Onboarding({ onDone }) {
     <div
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-300 bg-gradient-to-br ${slide.bg} ${leaving ? 'opacity-0' : 'opacity-100'}`}
     >
+      {/* Decorative orbs */}
+      <div className="absolute top-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl animate-orb-float" />
+      <div className="absolute bottom-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-3xl animate-orb-float-2" />
+      <div className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-white/[0.08] blur-2xl animate-orb-float" style={{ animationDelay: '1s' }} />
+
       {/* Skip */}
       <button
         onClick={finish}
@@ -53,11 +58,14 @@ export function Onboarding({ onDone }) {
         Omitir
       </button>
 
-      {/* Content */}
-      <div className="flex flex-col items-center text-center px-10 animate-fade-in" key={step}>
-        <div className="text-8xl mb-8 drop-shadow-lg">{slide.emoji}</div>
-        <h2 className="text-3xl font-extrabold text-white mb-4 leading-tight">{slide.title}</h2>
-        <p className="text-white/80 text-base leading-relaxed max-w-xs">{slide.desc}</p>
+      {/* Glass card content */}
+      <div className="relative z-10 flex flex-col items-center text-center px-10 animate-fade-in" key={step}>
+        <div className="glass-card p-6 rounded-3xl mb-8 shadow-2xl shadow-black/10">
+          <div className="text-7xl drop-shadow-lg">{slide.emoji}</div>
+        </div>
+        
+        <h2 className="text-3xl font-extrabold text-white mb-4 leading-tight drop-shadow-sm">{slide.title}</h2>
+        <p className="text-white/80 text-base leading-relaxed max-w-xs backdrop-blur-sm bg-white/5 rounded-2xl p-4">{slide.desc}</p>
       </div>
 
       {/* Dots */}
@@ -65,7 +73,7 @@ export function Onboarding({ onDone }) {
         {SLIDES.map((_, i) => (
           <div
             key={i}
-            className={`rounded-full transition-all duration-300 ${i === step ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/40'}`}
+            className={`rounded-full transition-all duration-300 ${i === step ? 'w-8 h-2 bg-white shadow-lg shadow-white/30' : 'w-2 h-2 bg-white/40'}`}
           />
         ))}
       </div>
@@ -73,7 +81,7 @@ export function Onboarding({ onDone }) {
       {/* CTA */}
       <button
         onClick={next}
-        className="px-10 py-3.5 bg-white text-[#1877F2] font-extrabold text-base rounded-full shadow-2xl hover:shadow-white/20 active:scale-95 transition-all"
+        className="px-10 py-3.5 glass-card text-indigo-600 dark:text-indigo-400 font-extrabold text-base rounded-full shadow-2xl hover:shadow-white/20 hover:bg-white/90 active:scale-95 transition-all"
       >
         {step < SLIDES.length - 1 ? 'Siguiente →' : '¡Empezar a comprar!'}
       </button>

@@ -26,13 +26,13 @@ export function OrderHistory() {
       {/* Header */}
       <div className="px-5 pt-6 pb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ClockCounterClockwise className="w-6 h-6 text-[#1877F2]" weight="duotone" />
-          <h1 className="text-xl font-extrabold text-slate-800 dark:text-[#E4E6EB]">Historial de Pedidos</h1>
+          <ClockCounterClockwise className="w-6 h-6 gradient-text" weight="duotone" />
+          <h1 className="text-xl font-extrabold text-slate-800 dark:text-slate-100">Historial de Pedidos</h1>
         </div>
         {orders.length > 0 && (
           <button
             onClick={clearHistory}
-            className="flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-600 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 px-3 py-1.5 rounded-full transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold text-red-500 hover:text-red-600 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 px-3 py-1.5 rounded-full transition-colors"
           >
             <Trash className="w-3.5 h-3.5" weight="bold" />
             Limpiar
@@ -43,10 +43,10 @@ export function OrderHistory() {
       {/* Empty state */}
       {orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 px-6 text-center">
-          <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-[#3A3B3C] flex items-center justify-center mb-5">
+          <div className="w-20 h-20 rounded-2xl glass-card flex items-center justify-center mb-5">
             <ShoppingBag className="w-10 h-10 text-slate-300 dark:text-slate-600" weight="duotone" />
           </div>
-          <h2 className="text-lg font-extrabold text-slate-700 dark:text-[#E4E6EB] mb-2">Sin pedidos aún</h2>
+          <h2 className="text-lg font-extrabold text-slate-700 dark:text-slate-200 mb-2">Sin pedidos aún</h2>
           <p className="text-slate-400 dark:text-slate-500 text-sm leading-relaxed max-w-[240px]">
             Cuando envíes un pedido por WhatsApp, aparecerá aquí para que lo puedas repetir fácilmente.
           </p>
@@ -56,17 +56,17 @@ export function OrderHistory() {
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white dark:bg-[#242526] rounded-2xl border border-slate-100 dark:border-[#3E4042] shadow-sm overflow-hidden"
+              className="glass-card rounded-2xl overflow-hidden"
             >
               {/* Order header */}
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-[#3E4042] flex items-center justify-between">
+              <div className="px-4 py-3 border-b border-white/30 dark:border-white/[0.06] flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-slate-400 dark:text-slate-500">{formatDate(order.date)}</p>
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">{formatDate(order.date)}</p>
                   <p className="text-sm font-extrabold text-slate-900 dark:text-white mt-0.5">
-                    Total: <span className="text-[#1877F2]">${order.total.toLocaleString('es-AR')} CUP</span>
+                    Total: <span className="gradient-text">${order.total.toLocaleString('es-AR')} CUP</span>
                   </p>
                 </div>
-                <span className="text-xs bg-[#E7F3FF] dark:bg-[#1877F2]/20 text-[#1877F2] font-bold px-2.5 py-1 rounded-full">
+                <span className="text-xs gradient-text bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-blue-500 font-bold px-2.5 py-1 rounded-full bg-indigo-50/80 dark:bg-indigo-500/10">
                   {order.items.reduce((s, i) => s + i.cantidad, 0)} productos
                 </span>
               </div>
@@ -78,7 +78,7 @@ export function OrderHistory() {
                     <span className="text-slate-700 dark:text-slate-300 truncate max-w-[180px]">
                       {item.nombre} <span className="text-slate-400">×{item.cantidad}</span>
                     </span>
-                    <span className="font-bold text-slate-800 dark:text-[#E4E6EB] flex-shrink-0">
+                    <span className="font-bold text-slate-800 dark:text-slate-100 flex-shrink-0">
                       ${(item.precio * item.cantidad).toLocaleString('es-AR')}
                     </span>
                   </div>
@@ -89,7 +89,7 @@ export function OrderHistory() {
               <div className="px-4 pb-4">
                 <button
                   onClick={() => reorder(order)}
-                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd5a] text-white font-bold text-sm py-2.5 rounded-xl shadow-md shadow-[#25D366]/20 transition-all active:scale-[0.98]"
+                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd5a] text-white font-bold text-sm py-2.5 rounded-xl shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] ring-1 ring-white/20"
                 >
                   <WhatsappLogo className="w-4 h-4" weight="fill" />
                   Repetir pedido

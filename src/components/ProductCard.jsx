@@ -23,10 +23,10 @@ export function ProductCard({ producto, onAdd }) {
     >
       <Link 
         to={`/producto/${id}`}
-        className="group bg-white dark:bg-[#242526] rounded-2xl border border-slate-100 dark:border-[#3E4042] shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:shadow-[#1877F2]/8 hover:-translate-y-0.5 hover:border-[#1877F2]/30 active:scale-[0.98] h-full"
+        className="group glass-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 hover:border-indigo-300/30 dark:hover:border-indigo-500/20 active:scale-[0.98] h-full"
       >
         {/* ── Image area ── */}
-        <div className="relative aspect-square w-full bg-slate-50 dark:bg-[#3A3B3C] overflow-hidden">
+        <div className="relative aspect-square w-full bg-slate-100/50 dark:bg-white/[0.03] overflow-hidden">
           <img 
             src={getProductMainImage(producto)} 
             alt={nombre}
@@ -35,12 +35,12 @@ export function ProductCard({ producto, onAdd }) {
           />
 
         {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Agotado overlay */}
         {!disponible && (
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] flex items-center justify-center z-10">
-            <span className="bg-white/90 dark:bg-[#242526]/90 text-slate-800 dark:text-[#E4E6EB] px-4 py-1.5 font-bold rounded-full text-sm shadow-sm">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[3px] flex items-center justify-center z-10">
+            <span className="bg-white/90 dark:bg-white/10 backdrop-blur-md text-slate-800 dark:text-white px-4 py-1.5 font-bold rounded-full text-sm shadow-sm ring-1 ring-white/30">
               Agotado
             </span>
           </div>
@@ -49,7 +49,7 @@ export function ProductCard({ producto, onAdd }) {
         {/* Badges top-left */}
         {destacado && (
           <div className="absolute top-2 left-2 z-10">
-            <span className="flex items-center gap-1 bg-gradient-to-r from-amber-400 to-orange-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md shadow-orange-400/30">
+            <span className="flex items-center gap-1 bg-gradient-to-r from-amber-400 to-orange-400 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md shadow-orange-400/30 ring-1 ring-white/20">
               ⭐ Destacado
             </span>
           </div>
@@ -58,8 +58,8 @@ export function ProductCard({ producto, onAdd }) {
 
       {/* ── Content ── */}
       <div className="p-4 flex flex-col flex-1">
-        <span className="text-[11px] font-semibold text-[#1877F2] uppercase tracking-wide mb-1">{categoria}</span>
-        <h3 className="font-semibold text-slate-800 dark:text-[#E4E6EB] leading-tight mb-3 line-clamp-2 flex-1 text-[14px]">
+        <span className="text-[11px] font-semibold gradient-text uppercase tracking-wider mb-1">{categoria}</span>
+        <h3 className="font-semibold text-slate-800 dark:text-slate-100 leading-tight mb-3 line-clamp-2 flex-1 text-[14px]">
           {nombre}
         </h3>
         
@@ -74,13 +74,13 @@ export function ProductCard({ producto, onAdd }) {
           {disponible ? (
             <RippleButton
               onClick={handleAdd}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1877F2] text-white hover:bg-[#166FE5] shadow-md shadow-[#1877F2]/30 active:scale-90 transition-transform"
+              className="flex items-center justify-center w-9 h-9 rounded-full gradient-primary text-white shadow-md shadow-indigo-500/25 active:scale-90 transition-transform ring-1 ring-white/20"
               aria-label="Añadir al carrito"
             >
               <Plus className="w-4 h-4 pointer-events-none" weight="bold" />
             </RippleButton>
           ) : (
-            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 dark:bg-[#3A3B3C] text-slate-300 dark:text-slate-600 cursor-not-allowed">
+            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-slate-100/80 dark:bg-white/[0.06] text-slate-300 dark:text-slate-600 cursor-not-allowed">
               <ShoppingBag className="w-4 h-4" weight="duotone" />
             </div>
           )}

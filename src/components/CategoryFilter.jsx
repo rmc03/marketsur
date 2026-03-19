@@ -41,8 +41,8 @@ export function CategoryFilter({ currentCategory, onSelectCategory }) {
               onClick={() => onSelectCategory(id === 'Todos' ? null : id)}
               className={`flex-none snap-start flex items-center gap-2 px-4 py-2.5 rounded-full text-[14px] font-semibold transition-all duration-200 ${
                 isActive
-                  ? 'bg-[#1877F2] text-white shadow-md shadow-[#1877F2]/20'
-                  : 'bg-white dark:bg-[#3A3B3C] border border-slate-200 dark:border-[#4E4F50] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#4E4F50] hover:border-slate-300 dark:hover:border-[#606770]'
+                  ? 'gradient-primary text-white shadow-md shadow-indigo-500/20 ring-1 ring-white/20'
+                  : 'bg-white/50 dark:bg-white/[0.06] backdrop-blur-xl border border-white/40 dark:border-white/[0.1] text-slate-600 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-white/[0.1] hover:border-white/60 dark:hover:border-white/[0.15]'
               }`}
             >
               <Icon
