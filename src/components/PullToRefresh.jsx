@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useRef } from 'react';
-import { useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
+import { motion, useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
 
 export function PullToRefresh({ onRefresh, children }) {
   const [isRefreshing, setIsRefreshing] = useState(false);
