@@ -23,19 +23,19 @@ export function ProductCard({ producto, onAdd }) {
     >
       <Link 
         to={`/producto/${id}`}
-        className="group glass-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 hover:border-indigo-300/30 dark:hover:border-indigo-500/20 active:scale-[0.98] h-full"
+        className="group glass-card rounded-2xl overflow-hidden flex flex-col transition-transform hover:-translate-y-1 active:scale-[0.98] h-full"
       >
         {/* ── Image area ── */}
         <div className="relative aspect-square w-full bg-slate-100/50 dark:bg-white/[0.03] overflow-hidden">
           <img 
             src={getProductMainImage(producto)} 
             alt={nombre}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform"
             loading="lazy"
           />
 
         {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100" />
 
         {/* Agotado overlay */}
         {!disponible && (

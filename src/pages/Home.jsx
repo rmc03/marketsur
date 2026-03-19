@@ -94,7 +94,7 @@ export function Home({ onAddToCart }) {
       </section>
 
       {/* Sticky: Search + Filter + Sort — Glass */}
-      <div className="sticky top-[52px] z-50 transform-gpu bg-white/60 dark:bg-[#0F0F1A]/60 backdrop-blur-2xl saturate-150 pb-3 shadow-sm shadow-indigo-500/[0.03] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] rounded-b-3xl transition-colors duration-400 border-b border-white/20 dark:border-white/[0.05]">
+      <div className="sticky top-[52px] z-50 transform-gpu bg-white/60 dark:bg-[#0F0F1A]/60 backdrop-blur-xl pb-3 shadow-sm shadow-indigo-500/[0.03] dark:shadow-[0_4px_30px_rgba(0,0,0,0.2)] rounded-b-3xl transition-colors duration-400 border-b border-white/20 dark:border-white/[0.05]">
         <SearchBar onSearch={setBusqueda} />
         <div className="flex items-center gap-2 px-4 pb-1">
           <div className="flex-1 overflow-x-auto">

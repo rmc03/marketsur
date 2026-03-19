@@ -86,7 +86,7 @@ function App() {
       {showOnboarding && <Onboarding onDone={doneOnboarding} />}
 
       <main 
-        className="w-full max-w-lg bg-white/40 dark:bg-white/[0.02] backdrop-blur-sm min-h-screen flex flex-col relative z-10 shadow-2xl shadow-indigo-500/[0.05] ring-1 ring-white/30 dark:ring-white/[0.05] transition-colors duration-400"
+        className="w-full max-w-lg bg-white/40 dark:bg-white/[0.02] min-h-screen flex flex-col relative z-10 shadow-2xl shadow-indigo-500/[0.05] ring-1 ring-white/30 dark:ring-white/[0.05] transition-colors duration-400"
       >
         
         <Navbar 

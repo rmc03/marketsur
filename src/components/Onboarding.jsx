@@ -45,10 +45,10 @@ export function Onboarding({ onDone }) {
     <div
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center transition-opacity duration-300 bg-gradient-to-br ${slide.bg} ${leaving ? 'opacity-0' : 'opacity-100'}`}
     >
-      {/* Decorative orbs */}
-      <div className="absolute top-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl animate-orb-float" />
-      <div className="absolute bottom-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-3xl animate-orb-float-2" />
-      <div className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-white/[0.08] blur-2xl animate-orb-float" style={{ animationDelay: '1s' }} />
+      {/* Static decorative orbs - no animation for performance */}
+      <div className="absolute top-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
+      <div className="absolute bottom-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
+      <div className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-white/[0.08] blur-2xl" />
 
       {/* Skip */}
       <button
