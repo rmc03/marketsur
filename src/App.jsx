@@ -73,14 +73,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#EEF2FF] dark:bg-[#0F0F1A] flex justify-center transition-colors duration-400 relative overflow-hidden">
-      {/* Decorative gradient orbs — fixed background */}
+      {/* Decorative gradient orbs — simplified for performance */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/20 to-blue-500/10 blur-3xl animate-orb-float" />
-        <div className="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-blue-400/15 to-cyan-400/10 blur-3xl animate-orb-float-2" />
-        <div className="absolute -bottom-20 left-1/4 w-72 h-72 rounded-full bg-gradient-to-br from-violet-400/15 to-indigo-500/10 blur-3xl animate-orb-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-400/10 to-blue-500/5 blur-3xl" />
+        <div className="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-blue-400/8 to-cyan-400/5 blur-3xl" />
         {/* Dark mode orbs */}
-        <div className="hidden dark:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-600/10 to-blue-700/5 blur-3xl animate-orb-float" />
-        <div className="hidden dark:block absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-blue-600/8 to-cyan-600/5 blur-3xl animate-orb-float-2" />
+        <div className="hidden dark:block absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-600/5 to-blue-700/3 blur-3xl" />
+        <div className="hidden dark:block absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-blue-600/4 to-cyan-600/2 blur-3xl" />
       </div>
 
       {/* Onboarding overlay */}

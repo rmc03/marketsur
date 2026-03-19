@@ -20,9 +20,9 @@ export function About() {
     <div className="pb-28 animate-fade-in">
       {/* Hero — Glassmorphism + Gradient */}
       <div className="hero-gradient text-white px-6 pt-10 pb-16 rounded-b-[48px] mb-8 text-center relative overflow-hidden shadow-xl shadow-indigo-500/20">
-        {/* Decorative orbs */}
-        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-xl animate-orb-float" />
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl animate-orb-float-2" />
+        {/* Static orbs for performance */}
+        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-xl" />
+        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl" />
         
         <div className="relative z-10">
           <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg ring-1 ring-white/30">

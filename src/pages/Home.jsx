@@ -78,11 +78,9 @@ export function Home({ onAddToCart }) {
     <div className="flex flex-col min-h-screen">
       {/* Hero — Glassmorphism + Gradient */}
       <section className="hero-gradient text-white pt-10 pb-16 px-6 rounded-b-[48px] mb-6 w-full max-w-lg mx-auto overflow-hidden relative shadow-xl shadow-indigo-500/20">
-        {/* Decorative glass orbs */}
-        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-xl animate-orb-float" />
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl animate-orb-float-2" />
-        <div className="absolute top-6 right-10 w-20 h-20 rounded-full bg-white/[0.15] backdrop-blur-sm animate-orb-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-10 right-1/4 w-14 h-14 rounded-full bg-white/[0.08] backdrop-blur-sm animate-orb-float-2" style={{ animationDelay: '3s' }} />
+        {/* Static decorative orbs - no animation for performance */}
+        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-xl" />
+        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl" />
         
         <div className="relative z-10 flex flex-col items-center text-center mt-2">
           <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-white/10 ring-1 ring-white/30">
