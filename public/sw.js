@@ -1,9 +1,11 @@
-const CACHE_NAME = 'marketsur-v1';
+const CACHE_NAME = 'marketsur-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/favicon.svg'
+  '/favicon.png',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 // Install event - cache resources

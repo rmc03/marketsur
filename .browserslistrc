@@ -1,0 +1,10 @@
+# Navegadores soportados
+> 0.5%
+last 2 versions
+Firefox ESR
+not dead
+not IE 11
+Chrome >= 61
+Safari >= 11
+iOS >= 11
+Android >= 5
